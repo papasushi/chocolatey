@@ -1,0 +1,2304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolatey Software | Chocolatey Core Extensions 1.3.5.1</title>
+    
+    
+        <meta property="og:description" content="Helper functions extending core choco functionality" />
+        <meta property="description" content="Helper functions extending core choco functionality" />
+
+
+    <meta property="og:title" content="Chocolatey Core Extensions 1.3.5.1" />
+    <meta property="product:brand" content="Chocolatey" />
+    <meta property="og:description" content="Chocolatey is software management automation for Windows that wraps installers, executables, zips, and scripts into compiled packages. Chocolatey integrates w/SCCM, Puppet, Chef, etc. Chocolatey is trusted by businesses to manage software deployments." />
+    <meta name="description" content="Chocolatey is software management automation for Windows that wraps installers, executables, zips, and scripts into compiled packages. Chocolatey integrates w/SCCM, Puppet, Chef, etc. Chocolatey is trusted by businesses to manage software deployments." />
+    <meta name="flattr:id" content="mqgjkp">
+    <meta property="DC.title" content="Chocolatey Core Extensions 1.3.5.1" />
+    <meta property="og:site_name" content="Chocolatey" />
+    <meta property="og:type" content="product" />
+    <meta property="product:category" content="software" />
+    <meta property="og:image" content="https://chocolatey.org/content/images/icon_slogan.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="700" />
+    <meta property="copyright" content="Chocolatey is Copyright 2017 - 2020 Chocolatey Software, Inc. Copyright 2011 - 2017 RealDimensions Software, LLC." />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,700">
+    
+<link href="/cassette.axd/stylesheet/6cf526041b1742822ad4c407c0211ecb4ac41500/Content/dist/chocolatey.slim.css" type="text/css" rel="stylesheet"/>
+<link href="/cassette.axd/stylesheet/06e0ca145ca55e06632ff0164bc4b31e3d3e5910/Content/packages.css" type="text/css" rel="stylesheet"/>
+<link href="/cassette.axd/stylesheet/5ac00500d551973740a699d86d118e9bfbc50069/Content/prism/prism.css" type="text/css" rel="stylesheet"/>
+<link href="/cassette.axd/stylesheet/b8d9e29bc587565d9b2aed9276e46fbf5fb0c1c9/Content/easymde.min.css" type="text/css" rel="stylesheet"/>
+
+    
+    
+
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png" />
+    <link rel="nuget" type="application/atom+xml" title="Chocolatey" href="https://www.chocolatey.org/api/v2" />
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Chocolatey Search" />
+    
+<script src="/cassette.axd/script/3e48fce4929af563c0e6fd08ce3972e5e4dfa5b7/Scripts/header" type="text/javascript"></script>
+
+    
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try{
+            var pageTracker = _gat._getTracker("UA-2743882-12");
+            pageTracker._trackPageview();
+        } catch(err) {}
+    </script>
+    
+    
+
+</head>
+
+
+
+
+<body>
+    
+<script type="text/javascript" src="https://secure.make6pain.com/js/194108.js"></script>
+<noscript><img alt="" src="https://secure.make6pain.com/194108.png" style="display:none;" /></noscript>
+
+<header class="w-100">
+    
+<div class="alert bg-danger text-white alert-dismissible fade show mb-0 text-center p-2 notice-text " role="alert" aria-atomic="true" style="display: none;">
+    <p class="mb-0 mr-3 mr-md-0"><strong><a href='/covid-19'><u>Here's how we're responding to COVID-19 plus resources to help</u></a></strong></p>
+    <button type="button" class="close py-0" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+    <a class="btn btn-primary btn-collapsing-right-sidebar btn-announcement-notifications collapsed py-3 d-hash-none d-none d-md-block shadow" data-toggle="collapse" href="#collapsing-right-sidebar" role="button" aria-expanded="false" aria-controls="collapsing right sidebar"><span class="notification-badge d-none" title="You have unread notifications"></span><i class="fas fa-bullhorn"></i></a>
+<nav id="collapsing-right-sidebar" class="collapsing-sidebar collapse shadow pt-3 px-3">
+    <div class="text-right text-md-left mb-3"><a class="h3 collapsed text-secondary" data-toggle="collapse" href="#collapsing-right-sidebar" role="button" aria-expanded="false" aria-controls="collapsing right sidebar"><span class="fas fa-times"></span></a></div>
+    
+<input id="announcementCookie" value="chocolatey_announcement_0" type="hidden" />
+
+<input id="announcementCount" value="4" type="hidden" />
+
+<div id="announcementCount"></div>
+<div id="announcementCarousel" class="carousel slide carousel-fade information-carousel" data-ride="carousel" data-touch="true" data-interval="6000" style="height: auto;">
+    <div class="carousel-inner px-3" style="height: auto;">
+        <div class="carousel-item active">
+            <div class="card bg-primary mb-0">
+                <div class="card-body text-center">
+                    <h3>Resources</h3>
+                    <p>Watch videos, read documentation, and hear Chocolatey success stories from companies you trust.</p>
+                    <a href="/resources" class="btn btn-light">View Resources</a>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="card bg-success text-white mb-0">
+                <div class="card-body text-center">
+                    <h3>Events</h3>
+                    <p>Find past and upcoming webinars, workshops, and conferences. New events have recently been added!</p>
+                    <a href="/events" class="btn btn-light">View Events</a>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="card bg-medium-dark mb-0">
+                <div class="card-body text-center">
+                    <h3>Courses</h3>
+                    <p>Step-by-step guides for all things Chocolatey! Earn badges as you learn through interactive digital courses.</p>
+                    <a href="/courses" class="btn btn-light">View Courses</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="shuffle">
+    <div class="text-center">
+        <a href="https://puppet.com/resources/webinar/the-business-value-of-modernizing-your-windows-infrastructure-and-bringing-linux-windows" rel="noreferrer" target="_blank">
+            <img class="img-fluid mb-3" src="/content/images/events/01-04.jpg" alt="The Business Value of Modernizing Your Windows Infrastructure and Bringing Linux & Windows Teams Closer" />
+        </a>
+        <p><strong>Webinar Replay from<br />Tuesday, 22 September 2020</strong></p>
+        <p class="text-left">
+            Standardising tool sets across different Teams is not always easy... especially when different Teams have traditionally used different approaches and methodologies.
+            In this webinar we will unpack the advantages of a more standard, consistent approach with Puppet & Chocolatey.
+        </p>
+        <a href="https://puppet.com/resources/webinar/the-business-value-of-modernizing-your-windows-infrastructure-and-bringing-linux-windows" rel="noreferrer" target="_blank" class="btn btn-primary">Watch Now</a>
+        <hr />
+    </div>
+    <div class="text-center">
+        <a href="/events/chocolatey-deployments">
+            <img class="img-fluid mb-3" src="/content/images/events/01-02.jpg" alt="Webinar: Chocolatey Deployments - Easily Orchestrate Amazing Things!" />
+        </a>
+        <p><strong>Webinar Replay from<br />Tuesday, 23 June 2020</strong></p>
+        <p class="text-left">Chocolatey Central Management now includes the premiere feature of managing endpoints through a Chocolatey-centered solution aka Deployments. We are excited to share what Deployments is all about!</p>
+        <a href="/events/chocolatey-deployments" class="btn btn-outline-primary">Learn More</a>
+        <a href="https://chocolatey.zoom.us/webinar/register/WN_MPT5b34zQnud8R0nGgpe5A" rel="noreferrer" target="_blank" class="btn btn-primary">Watch Now</a>
+        <hr />
+    </div>
+    <div class="text-center">
+        <h3 class="mb-3"><a class="btn-link" href="/covid-19">COVID-19 Resources</a></h3>
+        <p class="text-left">Chocolatey Software is working harder than ever to provide solutions and resources for our customers and community. We'll continue to add to this area so check back often.</p>
+        <a href="/covid-19" class="btn btn-primary">Find Resources</a>
+        <hr />
+    </div>
+    <div class="text-center">
+        <a href="/resources/features">
+            <img class="img-fluid mb-3" src="/content/images/videos/04-01.jpg" alt="Chocolatey for Business Feature Video Series" />
+        </a>
+        <p class="mb-3"><strong>Chocolatey for Business Feature Video Series</strong></p>
+        <p class="text-left">
+            In this video series, come take a tour of the many features available in our Chocolatey for Business offering.
+            Many organizations choose Chocolatey for Business when they want to scale out their solution across thousands of nodes, deploy rapidly and reliably every time,
+            mitigate risks with a greatly-simplified patching workflow, and access a Support Team that will guide you on your automation journey.
+        </p>
+        <a href="/resources/features" class="btn btn-primary">Watch the Series</a>
+        <hr />
+    </div>
+</div>
+</nav>
+    <nav id="topNav" class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand p-0" href="/">
+            <img class="d-none d-lg-block" alt="Chocolatey Software" src="/content/images/logo_square.svg" />
+            <img class="d-lg-none" alt="Chocolatey Software" src="/content/images/logo_small.svg" />
+        </a>
+        <div class="d-flex align-items-center btn-row d-lg-none">
+            <div class="">
+                <button class="btn btn-outline-light btn-nav-toggle" type="button" data-toggle="collapse" data-target="#topNavbar" aria-controls="topNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fas fa-bars"></span>
+                </button>
+            </div>
+            <div class="d-md-none">
+                <button class="btn btn-outline-light btn-announcements btn-announcement-notifications d-hash-none mt-0 position-relative" type="button" data-toggle="collapse" data-target="#collapsing-right-sidebar" aria-expanded="false" aria-controls="collapsing right sidebar"><span class="notification-badge d-none" title="You have unread notifications"></span><i class="fas fa-bullhorn"></i></button>
+            </div>
+                <div class="nav-search">
+                    <div class="nav-search-container d-none">
+                        
+<form class="form-inline search-box position-relative search-packages" autocomplete= "off" role="search" action="/search" method="get">
+    <div class="input-group w-100">
+        <input class="form-control" name="q" type="text" title="Search" placeholder="Search " value="" autofocus>
+        <div class="input-group-append">
+            <button class="btn btn-light" type="submit" title="Search" value="">
+                <span class="fas fa-search" alt="Search"></span>
+            </button>
+        </div>
+    </div>
+    <div class="search-help position-absolute d-none">
+        <span class="arrow-up position-absolute"></span>
+        <div class="card mt-3 rounded">
+            <div class="card-body d-md-flex justify-content-between text-dark">
+                <p class="mb-md-0 small"><strong>id:searchValue</strong> search by id only</p>
+                <p class="mb-0 small"><strong>tag:searchValue</strong> search by tags</p>
+            </div>
+        </div>
+    </div>
+</form>
+                    </div>
+                    <button class="btn btn-outline-light btn-search">
+                        <span class="fas fa-search" alt="Search"></span>
+                    </button>
+                </div>
+        </div>
+        <div class="collapse navbar-collapse" id="topNavbar">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="overview" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Overview</a>
+                    <div class="dropdown-menu" aria-labelledby="overview">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 d-lg-none">
+                                    <a class="goback" href="#"><span class="fas fa-chevron-left"></span> Go Back</a>
+                                    <h4 class="text-center">Overview</h4>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li>
+                                            <a href="/why-chocolatey">Why Chocolatey?</a>
+                                            <p class="d-none d-md-block">Chocolatey is a software management solution unlike anything else you've ever experienced on Windows. Chocolatey brings the concepts of true package management to allow you to version things, manage dependencies and installation order, better inventory management, and other features.</p>
+                                        </li>
+                                        <li><a href="/how-chocolatey-works">How Chocolatey Works</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><a href="/use-cases">Use Cases</a></li>
+                                        <li><a href="/use-cases#server">Server</a></li>
+                                        <li><a href="/use-cases#desktop">Desktop</a></li>
+                                        <li><a href="/use-cases#cloud">Cloud / Containers</a></li>
+                                        <li><a href="/use-cases#integrations">Integrations</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><a href="/resources/success-stories">Customer Stories</a></li>
+                                        <li><a href="/resources/success-stories/puppet-customer-success-story">Puppet<span class="fas fa-angle-right"></span></a></li>
+                                        <li><a href="/resources/success-stories/yelp-customer-success-story">Yelp<span class="fas fa-angle-right"></span></a></li>
+                                        <li><a href="/resources/success-stories/cme-group-customer-success-story">CME Group<span class="fas fa-angle-right"></span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="product" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product</a>
+                    <div class="dropdown-menu" aria-labelledby="product">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 d-lg-none">
+                                    <a class="goback" href="#"><span class="fas fa-chevron-left"></span> Go Back</a>
+                                    <h4 class="text-center">Product</h4>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li>
+                                            <a href="/products/chocolatey-for-business">Chocolatey for Business</a>
+                                            <p class="d-none d-md-block">Chocolatey for Business (C4B) is the enterprise offering that enables companies to adopt a DevOps approach to managing their Windows environment, allowing you to deliver applications to your users more reliably and faster.</p>
+                                        </li>
+                                        <li>
+                                            <a href="/products#pro-edition">Pro Edition</a>
+                                            <p class="d-none d-md-block">Pro is a personal, named license that grants having licensed versions of Chocolatey on up to 8 machines and provides the ultimate Chocolatey experience!</p>
+                                        </li>
+                                        <li>
+                                            <a href="/products#foss">Open Source</a>
+                                            <p class="d-none d-md-block">Chocolatey has the largest online registry of Windows packages. Learn how Open Source Chocolatey can support your next project.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li>
+                                            <a href="/compare">Compare Editions</a>
+                                            <p class="d-none d-md-block">Learn the difference between the Chocolatey Editions and what will fit your needs the best.</p>
+                                        </li>
+                                        <li><a href="/pricing">Pricing</a></li>
+                                        <li><a href="/contact/trial">Try Chocolatey for Business Free</a></li>
+                                        <li>
+                                            <a href="/pricing">Purchase</a>
+                                            <p class="d-none d-md-block">I'm ready to get started now!</p>
+                                        </li>
+                                        <li><a href="/support">Support</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li>
+                                            <a href="/events">Events</a>
+                                            <p class="d-none d-md-block">Find past and upcoming webinars, workshops, and conferences.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="solutions" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solutions</a>
+                    <div class="dropdown-menu" aria-labelledby="solutions">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 d-lg-none">
+                                    <a class="goback" href="#"><span class="fas fa-chevron-left"></span> Go Back</a>
+                                    <h4 class="text-center">Solutions</h4>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li>
+                                            <a href="/products/chocolatey-for-business">Chocolatey for Business</a>
+                                            <p class="d-none d-md-block">Chocolatey for Business (C4B) is the enterprise offering that enables companies to adopt a DevOps approach to managing their Windows environment, allowing you to deliver applications to your users more reliably and faster.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li>
+                                            <a href="/solutions">Self-Service Anywhere</a>
+                                            <p class="d-none d-md-block">
+                                                Chocolatey provides a unique approach to managing your end-user software (desktops / laptops) and can be combined with your existing solutions.
+                                                Chocolatey for Business (C4B) enables better security, enhanced visibility with centralized reporting, and a self-service GUI. Self-Service Anywhere allows non-administrators to easily access and manage IT approved software from the office, from home, or anywhere they have an internet connection.
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li>
+                                            <a href="/docs/quick-deployment-environment">Quick Deployment Environment (QDE)</a>
+                                            <p class="d-none d-md-block">
+                                                The Quick Deployment Environment (QDE) provides a single virtual machine appliance to be imported into your hypervisor-of-choice, which contains most of the various components of a Chocolatey organizational solution. Deploy recommended architecture in 2-3 hours.
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="community" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Community</a>
+                    <div class="dropdown-menu" aria-labelledby="community">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 d-lg-none">
+                                    <a class="goback" href="#"><span class="fas fa-chevron-left"></span> Go Back</a>
+                                    <h4 class="text-center">Community</h4>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li>
+                                            <a href="/packages">Community Packages</a>
+                                            <p class="d-none d-md-block">Search the largest online registry of Windows packages. Chocolatey packages encapsulate everything required to manage a particular piece of software into one deployment artifact by wrapping installers, executables, zips, and scripts into a compiled package file.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><a href="/community">Community Resources</a></li>
+                                        <li><a href="https://github.com/chocolatey" target="_blank" rel="noreferrer">Chocolatey on GitHub</a></li>
+                                        <li><a href="/blog">Blog</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li>
+                                            <a href="/events">Events</a>
+                                            <p class="d-none d-md-block">Find past and upcoming webinars, workshops, and conferences.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="learn" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Learn</a>
+                    <div class="dropdown-menu" aria-labelledby="learn">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 d-lg-none">
+                                    <a class="goback" href="#"><span class="fas fa-chevron-left"></span> Go Back</a>
+                                    <h4 class="text-center">Learn</h4>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li>
+                                            <a href="/install">Install Chocolatey</a>
+                                            <p class="d-none d-md-block">Get step-by-step instructions on how to install Chocolatey.</p>
+                                        </li>
+                                        <li>
+                                            <a href="/courses">Getting Started Course</a>
+                                            <p class="d-none d-md-block">New to Chocolatey? Learn the requirements and how to get Chocolatey up and running in no time!</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><a href="/resources">Resource Library</a></li>
+                                        <li><a href="/docs">Docs</a></li>
+                                        <li><a href="/resources/videos">Videos</a></li>
+                                        <li><a href="/resources/case-studies">Case Studies</a></li>
+                                        <li><a href="/courses">Courses</a></li>
+                                        <li><a href="/media-kit">Media Kit</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li>
+                                            <a href="/events">Events</a>
+                                            <p class="d-none d-md-block">Find past and upcoming webinars, workshops, and conferences.</p>
+                                        </li>
+                                        <li>
+                                            <a href="/covid-19">COVID-19 Resources</a>
+                                            <p class="d-none d-md-block">Chocolatey Software is working harder than ever to provide solutions and resources for our customers and community. We'll continue to add to this area so check back often.</p>
+                                        </li>
+                                        <li>
+                                            <a href="/support">Support</a>
+                                            <p class="d-none d-md-block">Need help? Read our Support FAQ to find out the next steps.</p>
+                                        </li>
+                                        <li><a href="/blog">Blog</a></li>
+                                        <li><a href="http://eepurl.com/4qUJH" target="_blank" rel="noreferrer">Newsletter</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="partners" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Partners</a>
+                    <div class="dropdown-menu" aria-labelledby="partners">
+                        <div class="container">
+                            <div class="row w-100">
+                                <div class="col-12 d-lg-none">
+                                    <a class="goback" href="#"><span class="fas fa-chevron-left"></span> Go Back</a>
+                                    <h4 class="text-center">Partners</h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul>
+                                        <li><a href="/partner">Overview</a></li>
+                                        <li><a href="/contact/partner">Become a Partner</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul>
+                                        <li><a href="/partner#technology">Technology Partners</a></li>
+                                        <li><a href="/partner#resellers">Resellers</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="about" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+                    <div class="dropdown-menu" aria-labelledby="about">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 d-lg-none">
+                                    <a class="goback" href="#"><span class="fas fa-chevron-left"></span> Go Back</a>
+                                    <h4 class="text-center">About</h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul>
+                                        <li>
+                                            <a href="/about">About Chocolatey</a>
+                                            <p class="d-none d-md-block">Chocolatey Software is focused on helping our community, customers, and partners with solutions that help fill the gaps that are often ignored. We offer a simple, pragmatic, and open approach to software management.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul>
+                                        <li><a href="/careers">Careers</a></li>
+                                        <li><a href="/contact">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                    <li class="nav-item d-none d-lg-block">
+                        <div class="nav-search">
+                            <div class="nav-search-container d-none">
+                                
+<form class="form-inline search-box position-relative search-packages" autocomplete= "off" role="search" action="/search" method="get">
+    <div class="input-group w-100">
+        <input class="form-control" name="q" type="text" title="Search" placeholder="Search " value="" autofocus>
+        <div class="input-group-append">
+            <button class="btn btn-light" type="submit" title="Search" value="">
+                <span class="fas fa-search" alt="Search"></span>
+            </button>
+        </div>
+    </div>
+    <div class="search-help position-absolute d-none">
+        <span class="arrow-up position-absolute"></span>
+        <div class="card mt-3 rounded">
+            <div class="card-body d-md-flex justify-content-between text-dark">
+                <p class="mb-md-0 small"><strong>id:searchValue</strong> search by id only</p>
+                <p class="mb-0 small"><strong>tag:searchValue</strong> search by tags</p>
+            </div>
+        </div>
+    </div>
+</form>
+                            </div>
+                            <button class="btn btn-outline-light btn-search">
+                                <span class="fas fa-search" alt="Search"></span>
+                            </button>
+                        </div>
+                    </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-light d-none d-lg-block" href="/install">Install Now</a>
+                    <a class="btn btn-primary d-lg-none" href="/install">Install Now</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+    <main class="mb-auto">
+        
+        
+
+<div class="modal modal-closeable" id="package-disclaimer" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Welcome to the Chocolatey Community Package Repository! The packages found in this section of the site are provided, maintained, and moderated by the community.</p>
+                <h3>Moderation</h3>
+                <p>Every version of each package undergoes a rigorous moderation process before it goes live that typically includes:</p>
+                <ul>
+                    <li><a href="/security#chocolateyorg-packages" target="_blank">Security</a>, consistency, and <a href="https://github.com/chocolatey/package-validator/wiki#what-is-the-validator" target="_blank">quality checking</a></li>
+                    <li><a href="https://github.com/chocolatey/package-verifier/wiki" target="_blank">Installation testing</a></li>
+                    <li><a href="/security#chocolateyorg-packages" target="_blank">Virus checking through VirusTotal</a></li>
+                    <li>Human moderators who give final review and sign off</li>
+                </ul>
+                <p>More detail at <a href="/security#chocolateyorg-packages" target="_blank">Security</a> and <a href="/docs/moderation" target="_blank">Moderation</a>.</p>
+                <h3>Organizational Use</h3>
+                <p>
+                    If you are an organization using Chocolatey, we want your experience to be fully reliable.
+                    Due to the nature of this publicly offered repository, <a href="/docs/community-packages-disclaimer#reliability" target="_blank">reliability</a> cannot be guaranteed.
+                    Packages offered here are subject to distribution rights, which means they may need to reach out further to the internet to the official locations to download files at runtime.
+                </p>
+                <p>
+                    Fortunately, distribution rights do not apply for internal use. With any edition of Chocolatey (including the free open source edition), you can <a href="/docs/how-to-host-feed" rel="noreferrer" target="_blank">host your own packages</a> and cache or <a href="/docs/how-to-recompile-packages" target="_blank">internalize</a> existing community packages.
+                </p>
+                <h3>Disclaimer</h3>
+                <p>Your use of the packages on this site means you understand they are not supported or guaranteed in any way. <a href="/docs/community-packages-disclaimer" rel="noreferrer" target="_blank">Learn more...</a></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close" data-dismiss="modal">I Understand</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="secondaryNav">
+    <div id="loader">
+    <div>
+        <img src="https://chocolatey.org/content/images/logo_small.svg" />
+        <div></div>
+    </div>
+</div>
+<nav class="navbar bg-white border-bottom d-flex">
+    <div class="container">
+        <div class="authentication-error mx-auto text-danger">
+            <p class="mb-0">Please enable JavaScript to view this sub navigation.</p>
+        </div>
+        <ul class="mr-0 d-none d-sm-flex">
+                <li>
+                    <a href="/packages">
+                        <span class="fas fa-download" alt="Packages"></span>
+                        <span>Packages</span>
+                    </a>
+                </li>
+        </ul>
+        <ul class="ux_login ml-sm-0 d-none">
+            <li>
+                <a href="/account/Register">
+                    <span class="fas fa-user-plus" alt="Signup"></span>
+                    <span>Signup</span>
+                </a>
+            </li>
+            <li>
+                <a href="/users/account/LogOn">
+                    <span class="fas fa-sign-in-alt" alt="Login"></span>
+                    <span>Login</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="ux_logoff ml-sm-0 d-none">
+            <li>
+                <a href="/account">
+                    <span class="fas fa-cogs" alt="Account"></span>
+                    <span>Account</span>
+                </a>
+            </li>
+            <li class="ux_profile">
+                <a href="/account/Profiles">
+                    <span class="fas fa-user-alt" alt="Profile"></span>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li>
+<form action="/users/account/LogOff" method="post">                    <fieldset class="form">
+                        <input name="__RequestVerificationToken" type="hidden" value="E+CFCWCYgVn3+7YtpmjBxGqMN6EATEe4sGRpU+dE9b+kCpJhbZMt/dUj5KPGqdBZc3mVjOs9xX9TiBjcsKRkLLTNLY/Ixv3QH6TH75EL1hLL9ZkGbL2cXw9VzP96UBwV1ye0WgCLvKyj2v8MA82E5Mn7RR17mJofLiM1cXPiijusX69wYN9epSsb3kidvyio" />
+                        <button class="btn btn-link align-items-center p-0 text-decoration-none" type="submit">
+                            <span class="fas fa-sign-out-alt" alt="Log Off"></span>
+                            <span class="font-weight-bold">Log Off</span>
+                        </button>
+                    </fieldset>
+</form>            </li>
+        </ul>
+    </div>
+</nav>
+    <nav class="navbar bg-white border-bottom d-none d-sm-flex">
+    <div class="container">
+        <ul class="d-flex">
+            <li class="d-sm-flex align-items-center">
+                <span class="status status-sm bg-success"></span>
+                <small>Passing</small>
+            </li>
+            <li class="d-sm-flex align-items-center">
+                <span class="status status-sm bg-danger"></span>
+                <small>Failing</small>
+            </li>
+            <li class="d-sm-flex align-items-center">
+                <span class="status status-sm bg-warning"></span>
+                <small>Pending</small>
+            </li>
+            <li class="d-sm-flex align-items-center">
+                <span class="status status-sm bg-secondary"></span>
+                <small>Unknown / Exempted</small>
+            </li>
+        </ul>
+    </div>
+</nav>
+</section>
+<section class="container py-3 py-lg-5">
+    <div id="package-sidebar" class="row">
+        
+        <div class="col-md-3 col-xl-2 d-none d-md-block">
+            <img class="package-logo img-fluid" src="/Content/Images/packageDefaultIcon.png" alt="Icon for package chocolatey-core.extension" title="Icon for package chocolatey-core.extension | Nuspec reference: &lt;iconUrl&gt;&lt;/iconurl&gt;" onerror="this.src='/Content/Images/packageDefaultIcon.png';" />
+            <p class="mb-0"><strong>Downloads:</strong></p>
+            <h3 class="mb-3">20,201,636</h3>
+            <p class="mb-0"><strong>Downloads of v 1.3.5.1:</strong></p>
+            <h3 class="mb-3">6,533,810</h3>
+            <p class="mb-0"><strong>Last Update:</strong></p>
+            <h3 class="mb-3">21 Nov 2019</h3>
+            <p class="mb-0" title="Nuspec reference: owners | nuspec value not used on community feed | Specified as comma-separated"><strong>Package Maintainer(s):</strong></p>
+                <ul class="list-unstyled mb-2 mb-md-0">
+        <li>
+                <a class="d-flex align-items-center mb-2" href="/profiles/chocolatey-community" title="chocolatey-community">
+<img src="https://secure.gravatar.com/avatar/89c247c45c6689b8bd4c91cb2b354975?s=32&amp;r=g&amp;d=retro" class="rounded-circle" height="32" title="chocolatey-community" width="32" alt="gravatar" />            <span class="ml-2">chocolatey-community</span>
+    </a>
+
+        </li>
+    </ul>  
+
+            <p class="mb-0 mt-3" title="Software authors. Nuspec reference: authors | Specified as comma-separated"><strong>Software Author(s):</strong></p>
+            <ul class="list-unstyled">
+                    <li class="text-break">chocolatey</li>
+            </ul>
+                <p class="mb-0" title="Nuspec reference: tags | Specified as space-separated"><strong>Tags:</strong></p>
+                    <a class="badge badge-pill badge-primary" href="/packages?q=tag%3Achocolatey" title="Search for chocolatey">chocolatey</a>
+                    <a class="badge badge-pill badge-primary" href="/packages?q=tag%3Acore" title="Search for core">core</a>
+                    <a class="badge badge-pill badge-primary" href="/packages?q=tag%3Aextension" title="Search for extension">extension</a>
+                    <a class="badge badge-pill badge-primary" href="/packages?q=tag%3Aadmin" title="Search for admin">admin</a>
+            <ul class="list-unstyled">
+                <li class="mt-3"><strong>Software Specific:</strong></li>
+                    <li><a href="https://github.com/chocolatey/chocolatey-coreteampackages" title="Visit the software site to learn more about the software this package installs. Nuspec reference: &lt;projectUrl&gt;https://github.com/chocolatey/chocolatey-coreteampackages&lt;/projectUrl&gt;">Software Site</a></li>
+                    <li><a href="https://github.com/chocolatey/chocolatey-coreteampackages" title="See the software source. Nuspec reference: &lt;projectSourceUrl&gt;https://github.com/chocolatey/chocolatey-coreteampackages&lt;/projectSourceUrl&gt;">Software Source</a></li>
+                    <li><a href="https://github.com/chocolatey/chocolatey-coreteampackages/blob/master/LICENSE.md" title="Make sure you agree with the software license. Nuspec reference: &lt;licenseUrl&gt;https://github.com/chocolatey/chocolatey-coreteampackages/blob/master/LICENSE.md&lt;/licenseUrl&gt;">Software License</a></li>
+                    <li><a href="https://github.com/chocolatey/chocolatey-coreteampackages/tree/master/extensions/chocolatey-core.extension/README.md" title="See the project's documentation. Nuspec reference: &lt;docsUrl&gt;https://github.com/chocolatey/chocolatey-coreteampackages/tree/master/extensions/chocolatey-core.extension/README.md&lt;/docsUrl&gt;">Software Docs</a></li>
+                    <li><a href="https://github.com/chocolatey/chocolatey-coreteampackages/issues" title="See the project's issue link. Nuspec reference: &lt;bugTrackerUrl&gt;https://github.com/chocolatey/chocolatey-coreteampackages/issues&lt;/bugTrackerUrl&gt;">Software Issues</a></li>
+                <li class="mt-3"><strong>Package Specific:</strong></li>
+                    <li><a href="https://github.com/chocolatey/chocolatey-coreteampackages/tree/master/extensions/chocolatey-core.extension" title="See the package source. Nuspec reference: &lt;packageSourceUrl&gt;https://github.com/chocolatey/chocolatey-coreteampackages/tree/master/extensions/chocolatey-core.extension&lt;/packageSourceUrl&gt;">Package Source</a></li>
+                <li><a href="/docs/package-triage-process">Package outdated?</a></li>
+                <li><a href="/docs/package-triage-process">Package broken?</a></li>
+                <li><a href="/packages/chocolatey-core.extension/ContactOwners">Contact Maintainers</a></li>
+                <li><a href="/packages/chocolatey-core.extension/1.3.5.1/ContactAdmins" title="Contact Site Moderators">Contact Site Admins</a></li>
+                <li><a href="/docs/package-triage-process#are-you-a-software-vendor">Software Vendor?</a></li>
+                <li><a href="/packages/chocolatey-core.extension/1.3.5.1/ReportAbuse" title="Report Abuse">Report Abuse</a></li>
+                <li>
+                    <a class="btn btn-secondary btn-sm mt-2" href="https://chocolatey.org/api/v2/package/chocolatey-core.extension/1.3.5.1" title="Download the raw nupkg file." download><i class="fas fa-download" alt="Download"></i> Download</a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="col-12 d-md-none">
+            <div class="justify-content-center align-items-center d-flex">
+                <img class="package-logo img-fluid mr-2" src="/Content/Images/packageDefaultIcon.png" alt="Icon for package chocolatey-core.extension" title="Icon for package chocolatey-core.extension | Nuspec reference: &lt;iconUrl&gt;&lt;/iconurl&gt;" onerror="this.src='/Content/Images/packageDefaultIcon.png';" />
+                <h4 class="mb-0" title="Nuspec reference: &lt;title&gt;Chocolatey Core Extensions&lt;/title&gt;">Chocolatey Core Extensions</h4>
+            </div>
+            <div class="justify-content-center align-items-center d-flex">
+                <div class="d-flex">
+                    <a class="status status-sm bg-success" href="#status" title="Click to view test results">
+                        <span class="Passing"></span>
+                        <span class="Passing"></span>
+                    </a>
+                </div>
+                    <p title="Nuspec reference: &lt;version&gt;1.3.5.1&lt;/version&gt;" class="mb-0">1.3.5.1 | <strong>Updated: </strong>21 Nov 2019</p>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-sm btn-primary mb-3 mt-1" type="button" data-toggle="collapse" data-target="#additional-links" aria-expanded="false" aria-controls="additional-links">
+                    Show Additional Links
+                </button>
+                <div class="collapse text-left" id="additional-links">
+                    <ul class="list-unstyled">
+                        <li class="mt-3"><strong>Software Specific:</strong></li>
+                            <li><a href="https://github.com/chocolatey/chocolatey-coreteampackages" title="Visit the software site to learn more about the software this package installs. Nuspec reference: &lt;projectUrl&gt;https://github.com/chocolatey/chocolatey-coreteampackages&lt;/projectUrl&gt;">Software Site</a></li>
+                            <li><a href="https://github.com/chocolatey/chocolatey-coreteampackages" title="See the software source. Nuspec reference: &lt;projectSourceUrl&gt;https://github.com/chocolatey/chocolatey-coreteampackages&lt;/projectSourceUrl&gt;">Software Source</a></li>
+                            <li><a href="https://github.com/chocolatey/chocolatey-coreteampackages/blob/master/LICENSE.md" title="Make sure you agree with the software license. Nuspec reference: &lt;licenseUrl&gt;https://github.com/chocolatey/chocolatey-coreteampackages/blob/master/LICENSE.md&lt;/licenseUrl&gt;">Software License</a></li>
+                            <li><a href="https://github.com/chocolatey/chocolatey-coreteampackages/tree/master/extensions/chocolatey-core.extension/README.md" title="See the project's documentation. Nuspec reference: &lt;docsUrl&gt;https://github.com/chocolatey/chocolatey-coreteampackages/tree/master/extensions/chocolatey-core.extension/README.md&lt;/docsUrl&gt;">Software Docs</a></li>
+                            <li><a href="https://github.com/chocolatey/chocolatey-coreteampackages/issues" title="See the project's issue link. Nuspec reference: &lt;bugTrackerUrl&gt;https://github.com/chocolatey/chocolatey-coreteampackages/issues&lt;/bugTrackerUrl&gt;">Software Issues</a></li>
+                        <li class="mt-3"><strong>Package Specific:</strong></li>
+                            <li><a href="https://github.com/chocolatey/chocolatey-coreteampackages/tree/master/extensions/chocolatey-core.extension" title="See the package source. Nuspec reference: &lt;packageSourceUrl&gt;https://github.com/chocolatey/chocolatey-coreteampackages/tree/master/extensions/chocolatey-core.extension&lt;/packageSourceUrl&gt;">Package Source</a></li>
+                        <li><a href="/docs/package-triage-process">Package outdated?</a></li>
+                        <li><a href="/docs/package-triage-process">Package broken?</a></li>
+                        <li><a href="/packages/chocolatey-core.extension/ContactOwners">Contact Maintainers</a></li>
+                        <li><a href="/packages/chocolatey-core.extension/1.3.5.1/ContactAdmins" title="Contact Site Moderators">Contact Site Admins</a></li>
+                        <li><a href="/docs/package-triage-process#are-you-a-software-vendor">Software Vendor?</a></li>
+                        <li><a href="/packages/chocolatey-core.extension/1.3.5.1/ReportAbuse" title="Report Abuse">Report Abuse</a></li>
+                        <li>
+                            <a href="https://chocolatey.org/api/v2/package/chocolatey-core.extension/1.3.5.1" title="Download the raw nupkg file.">Download</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row border-bottom">
+                <div class="col">
+                    <p class="mb-0"><small>Downloads:</small></p>
+                    <p class="mb-1">20,201,636</p>
+                </div>
+                <div class="col">
+                    <p class="mb-0"><small>Downloads of v 1.3.5.1:</small></p>
+                    <p class="mb-1">6,533,810</p>
+                </div>
+            </div>
+            <div class="border-bottom">
+                <p class="mb-0" title="Nuspec reference: owners | nuspec value not used on community feed | Specified as comma-separated"><small>Maintainer(s):</small></p>
+                    <ul class="list-unstyled mb-2 mb-md-0">
+        <li>
+                <a class="d-flex align-items-center mb-2" href="/profiles/chocolatey-community" title="chocolatey-community">
+<img src="https://secure.gravatar.com/avatar/89c247c45c6689b8bd4c91cb2b354975?s=32&amp;r=g&amp;d=retro" class="rounded-circle" height="32" title="chocolatey-community" width="32" alt="gravatar" />            <span class="ml-2">chocolatey-community</span>
+    </a>
+
+        </li>
+    </ul>  
+
+            </div>
+            <p class="mb-0" title="Software authors. Nuspec reference: authors | Specified as comma-separated"><small>Software Author(s):</small></p>
+            <ul class="list-unstyled mb-0 pb-1 border-bottom">
+                    <li class="text-break">chocolatey</li>
+            </ul>
+                <div class="mb-3">
+                    <p class="mb-0" title="Nuspec reference: tags | Specified as space-separated"><small>Tags:</small></p>
+                        <a class="badge badge-pill badge-primary" href="/packages?q=tag%3Achocolatey" title="Search for chocolatey">chocolatey</a>
+                        <a class="badge badge-pill badge-primary" href="/packages?q=tag%3Acore" title="Search for core">core</a>
+                        <a class="badge badge-pill badge-primary" href="/packages?q=tag%3Aextension" title="Search for extension">extension</a>
+                        <a class="badge badge-pill badge-primary" href="/packages?q=tag%3Aadmin" title="Search for admin">admin</a>
+                </div>
+        </div>
+        
+        <div class="modal fade" id="package-edit" tabindex="-1" role="dialog" aria-labelledby="package-edit" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header justify-content-center">
+                        <h2 class="mb-0">Edit Package</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>To edit the metadata for a package, please upload an updated version of the package.</strong></p>
+                        <p>
+                            Chocolatey's Community Package Repository currently does not allow updating package metadata on the website. This helps ensure
+                            that the package itself (and the source used to build the package) remains the one true
+                            source of package metadata.
+                        </p>
+                        <p class="mb-0">This does require that you increment the package version.</p>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <a href="/packages/upload" class="btn btn-success"><i class="fas fa-upload" alt="Upload"></i> Upload Updated Package</a>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-9 col-xl-10">
+            <div class="mb-3 d-none d-md-block">
+                <h1 class="justify-content-center align-items-center d-flex mb-0" title="Nuspec reference: &lt;title&gt;Chocolatey Core Extensions&lt;/title&gt;">
+                    <span class="d-flex">
+                        <a class="status" href="#status" title="Click to view test results">
+                            <span class="Passing"></span>
+                            <span class="Passing"></span>
+                        </a>
+                    </span>
+                    Chocolatey Core Extensions
+                        <span class="ml-2" title="Nuspec reference: &lt;version&gt;1.3.5.1&lt;/version&gt;">1.3.5.1</span>
+                </h1>
+            </div>
+            
+            <div id="status" class="callout p-0 callout-success">
+                <div class="d-flex justify-content-between p-3">
+                    <div class="d-flex">
+                        <div class="d-flex">
+                            <span class="status">
+                                <span class="Passing"></span>
+                                <span class="Passing"></span>
+                            </span>
+                        </div>
+                        <div>
+                                <h3 class="text-success">All Checks are Passing</h3>
+                                <p>2 Passing Test</p>
+                        </div>
+                    </div>
+                    <div class="d-none d-xl-block">
+                        <a class="collapsed btn btn-sm btn-secondary" data-toggle="collapse" href="#testingResults" role="button" aria-expanded="true" aria-controls="testing results" title="Testing Results">Show Checks</a>
+                    </div>
+                </div>
+                <div class="px-3 pb-3 d-xl-none">
+                    <a class="collapsed btn btn-sm btn-secondary" data-toggle="collapse" href="#testingResults" role="button" aria-expanded="true" aria-controls="testing results" title="Testing Results">Show Checks</a>
+                </div>
+                <div class="collapse " id="testingResults">
+                    <hr class="mt-0" />
+                    
+                    <div class="px-3">
+                            <p class="mb-0"><span class="fas fa-check text-success mr-3"></span> Validation Testing Passed</p>
+                    </div>
+                    <hr />
+                    
+                    <div class="d-flex justify-content-between px-3 pb-3">
+                            <p class="mb-0"><span class="fas fa-check text-success mr-3"></span> Verification Testing Passed</p>
+                            <a href="https://gist.github.com/d0afa0ed0c06600ea8e96291fbd6589b" target="_blank" rel="noreferrer">Details</a>
+                    </div>
+                </div>
+            </div>
+            
+                    <ul class="nav card-tabs nav-tabs border-bottom-0" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="individual-tab" data-toggle="tab" href="#individual" role="tab" aria-controls="individual" aria-selected="true">Individual</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="organization-tab" data-toggle="tab" href="#organization" role="tab" aria-controls="organization" aria-selected="false">Organization</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content bg-white p-3 shadow-sm mb-3 position-relative">
+                        
+                        <div class="tab-pane fade show active" id="individual" role="tabpanel" aria-labelledby="individual-tab">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="install-tab" data-toggle="tab" href="#install" role="tab" aria-controls="install" aria-selected="true">Install</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="upgrade-tab" data-toggle="tab" href="#upgrade" role="tab" aria-controls="upgrade" aria-selected="false">Upgrade</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="uninstall-tab" data-toggle="tab" href="#uninstall" role="tab" aria-controls="uninstall" aria-selected="false">Uninstall</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content p-3">
+                                <div class="tab-pane fade show active" id="install" role="tabpanel" aria-labelledby="install-tab">
+                                    <p class="mb-3">To install Chocolatey Core Extensions, run the following command from the command line or from PowerShell:</p>
+                                    <div class="input-group copyBox">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">></div>
+                                        </div>
+                                        <input type="text" class="form-control"
+                                                value="choco install chocolatey-core.extension"
+                                                aria-label="Install Chocolatey Core Extensions command"
+                                                readonly>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary tt"
+                                                    aria-label="Copy chocolatey-core.extension to Clipboard"
+                                                    data-toggle="tooltip"
+                                                    title="Copy to Clipboard"
+                                                    data-clipboard-text="choco install chocolatey-core.extension">
+                                                <i class="fas fa-clipboard" aria-hidden="true">
+                                                    <span class="sr-only">
+                                                        Copy chocolatey-core.extension to Clipboard
+                                                    </span>
+                                                </i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="upgrade" role="tabpanel" aria-labelledby="upgrade-tab">
+                                    <p class="mb-3">To upgrade Chocolatey Core Extensions, run the following command from the command line or from PowerShell:</p>
+                                    <div class="input-group copyBox">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">></div>
+                                        </div>
+                                        <input type="text" class="form-control"
+                                                value="choco upgrade chocolatey-core.extension"
+                                                aria-label="Upgrade Chocolatey Core Extensions command"
+                                                readonly>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary tt"
+                                                    aria-label="Copy chocolatey-core.extension to Clipboard"
+                                                    data-toggle="tooltip"
+                                                    title="Copy to Clipboard"
+                                                    data-clipboard-text="choco upgrade chocolatey-core.extension">
+                                                <i class="fas fa-clipboard" aria-hidden="true">
+                                                    <span class="sr-only">
+                                                        Copy chocolatey-core.extension to Clipboard
+                                                    </span>
+                                                </i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="uninstall" role="tabpanel" aria-labelledby="uninstall-tab">
+                                    <p class="mb-3">To uninstall Chocolatey Core Extensions, run the following command from the command line or from PowerShell:</p>
+                                    <div class="input-group copyBox">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">></div>
+                                        </div>
+                                        <input type="text" class="form-control"
+                                                value="choco uninstall chocolatey-core.extension"
+                                                aria-label="Uninstall Chocolatey Core Extensions command"
+                                                readonly>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary tt"
+                                                    aria-label="Copy chocolatey-core.extension to Clipboard"
+                                                    data-toggle="tooltip"
+                                                    title="Copy to Clipboard"
+                                                    data-clipboard-text="choco uninstall chocolatey-core.extension">
+                                                <i class="fas fa-clipboard" aria-hidden="true">
+                                                    <span class="sr-only">
+                                                        Copy chocolatey-core.extension to Clipboard
+                                                    </span>
+                                                </i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="organization" role="tabpanel" aria-labelledby="organization-tab">
+                            <p class="small font-weight-bold">NOTE: This applies to both open source and commercial editions of Chocolatey.</p>
+                            
+                            <h4>1. Ensure you are set for organizational deployment</h4>
+                            <p>Please see the <a href="/docs/how-to-setup-offline-installation">organizational deployment guide</a></p>
+                            
+                            <a class="h4 collapsed d-block" data-toggle="collapse" href="#install-step2" role="button" aria-expanded="false" aria-controls="install-step2" title="Install Step 2">2. Get the package into your environment</a>
+                            <div class="collapse" id="install-step2">
+                                <div class="p-3">
+                                    
+                                    <a class="h5 collapsed d-block" data-toggle="collapse" href="#install-step2-option1" role="button" aria-expanded="false" aria-controls="install-step2-option1" title="Install Step 2 Option 1">Option 1: Cached Package (Unreliable, Requires Internet - Same As Community)</a>
+                                    <div class="collapse" id="install-step2-option1">
+                                        <ul>
+                                            <li>
+                                                Open Source or Commercial:
+                                                <ul>
+                                                    <li>Proxy Repository - Create a proxy nuget repository on Nexus, Artifactory Pro, or a proxy Chocolatey repository on ProGet. Point your upstream to <strong>https://chocolatey.org/api/v2</strong>. Packages cache on first access automatically. Make sure your choco clients are using your proxy repository as a source and NOT the default community repository. See <a href="/docs/commands-sources">source command</a> for more information.</li>
+                                                    <li>You can also just download the package and push it to a repository <a class="btn btn-secondary btn-sm" href="https://chocolatey.org/api/v2/package/chocolatey-core.extension/1.3.5.1" title="Download the raw nupkg file." download><i class="fas fa-download" alt="Download"></i> Download</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <a class="h5 mt-3 collapsed d-block" data-toggle="collapse" href="#install-step2-option2" role="button" aria-expanded="false" aria-controls="install-step2-option1" title="Install Step 2 Option 2">Option 2: Internalized Package (Reliable, Scalable)</a>
+                                    <div class="collapse" id="install-step2-option2">
+                                        <ul>
+                                            <li>
+                                                Open Source
+                                                <ul>
+                                                    <li>Download the Package <a class="btn btn-secondary btn-sm" href="https://chocolatey.org/api/v2/package/chocolatey-core.extension/1.3.5.1" title="Download the raw nupkg file." download><i class="fas fa-download" alt="Download"></i> Download</a></li>
+                                                    <li><a href="/docs/how-to-recompile-packages">Follow manual internalization instructions</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                Package Internalizer (C4B)
+                                                <ul>
+                                                    <li>Run <code>choco download chocolatey-core.extension --internalize  --source=https://chocolatey.org/api/v2</code> <a href="/docs/commands-download">(additional options)</a></li>
+                                                    <li>Run <code>choco push --source=&quot;'http://internal/odata/repo'&quot;</code> for package and dependencies</li>
+                                                    <li><a href="/docs/how-to-setup-internal-package-repository">Automate package internalization</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h4 class="mt-4">3. Enter your internal repository url</h4>
+                            <input class="form-control w-50" id="stepThreeUrl" type="text" placeholder="http://internal/odata/repo" />
+                            <p><small>(this should look similar to <a href="https://chocolatey.org/api/v2">https://chocolatey.org/api/v2</a>)</small></p>
+                            
+                            <h4 class="mt-4">4. Choose your deployment method:</h4>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="generic-tab" data-toggle="tab" href="#generic" role="tab" aria-controls="generic" aria-selected="false">Generic</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="ansible-tab" data-toggle="tab" href="#ansible" role="tab" aria-controls="ansible" aria-selected="false">Ansible</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="ccm-tab" data-toggle="tab" href="#ccm" role="tab" aria-controls="ccm" aria-selected="false">Central Management</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="chef-tab" data-toggle="tab" href="#chef" role="tab" aria-controls="chef" aria-selected="false">Chef</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="otter-tab" data-toggle="tab" href="#otter" role="tab" aria-controls="otter" aria-selected="false">Otter</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="psdsc-tab" data-toggle="tab" href="#psdsc" role="tab" aria-controls="psdsc" aria-selected="false">PS DSC</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="puppet-tab" data-toggle="tab" href="#puppet" role="tab" aria-controls="puppet" aria-selected="false">Puppet</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="salt-tab" data-toggle="tab" href="#salt" role="tab" aria-controls="salt" aria-selected="false">Salt</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content stepThree p-3">
+                                <div class="tab-pane fade show active" id="generic" role="tabpanel" aria-labelledby="generic-tab">
+<pre class="language-powershell border py-3"><code>
+choco upgrade chocolatey-core.extension -y --source=&quot;'STEP 3 URL'&quot; [other options]
+</code></pre>
+                                    <p class="mt-3">See <a href="/docs/commands-upgrade#options-and-switches">options you can pass to upgrade.</a></p>
+                                    <p>See <a href="/docs/commands-reference#scripting-integration-best-practices-style-guide">best practices for scripting.</a></p>
+                                    <p>Add this to a PowerShell script or use a Batch script with tools and in places where you are calling directly to Chocolatey. If you are integrating, keep in mind enhanced exit codes.</p>
+                                    <p>If you do use a PowerShell script, use the following to ensure bad exit codes are shown as failures:</p>
+<pre class="language-powershell line-numbers border py-3"><code>
+choco upgrade chocolatey-core.extension -y --source="'STEP 3 URL'"
+$exitCode = $LASTEXITCODE
+
+Write-Verbose "Exit code was $exitCode"
+$validExitCodes = @(0, 1605, 1614, 1641, 3010)
+if ($validExitCodes -contains $exitCode) {
+  Exit 0
+}
+
+Exit $exitCode
+</code></pre>
+                                </div>
+                                <div class="tab-pane fade" id="ansible" role="tabpanel" aria-labelledby="ansible-tab">
+<pre class="language-yaml line-numbers border py-3"><code>
+- name: Ensure chocolatey-core.extension installed
+  win_chocolatey:
+    name: chocolatey-core.extension
+    state: present
+    version: 1.3.5.1
+    source: STEP 3 URL
+</code></pre>
+                                    <p>See docs at <a href="https://docs.ansible.com/ansible/latest/modules/win_chocolatey_module.html" target="_blank" rel="noreferrer">https://docs.ansible.com/ansible/latest/modules/win_chocolatey_module.html</a>.</p>
+                                </div>
+                                <div class="tab-pane fade" id="ccm" role="tabpanel" aria-labelledby="ccm-tab">
+                                    <p>Coming early 2020! Central Managment Reporting available now! <a href="/docs/features-chocolatey-central-management">More information...</a></p>
+                                </div>
+                                <div class="tab-pane fade" id="chef" role="tabpanel" aria-labelledby="chef-tab">
+<pre class="language-ruby line-numbers border py-3"><code>
+chocolatey_package 'chocolatey-core.extension' do
+  action    :install
+  version  '1.3.5.1'
+  source   'STEP 3 URL'
+end
+</code></pre>
+                                    <p>See docs at <a href="https://docs.chef.io/resource_chocolatey_package.html" target="_blank" rel="noreferrer">https://docs.chef.io/resource_chocolatey_package.html</a>.</p>
+                                </div>
+                                <div class="tab-pane fade" id="otter" role="tabpanel" aria-labelledby="otter-tab">
+<pre class="language-powershell line-numbers border py-3"><code>
+Chocolatey::Ensure-Package
+(
+    Name: chocolatey-core.extension,
+    Version: 1.3.5.1,
+    Source: STEP 3 URL
+);
+</code></pre>
+                                    <p>Requires Otter Chocolatey Extension. See docs at <a href="https://inedo.com/den/otter/chocolatey" target="_blank" rel="noreferrer">https://inedo.com/den/otter/chocolatey</a>.</p>
+                                </div>
+                                <div class="tab-pane fade" id="psdsc" role="tabpanel" aria-labelledby="psdsc-tab">
+<pre class="language-powershell line-numbers border py-3"><code>
+cChocoPackageInstaller chocolatey-core.extension
+{
+   Name     = 'chocolatey-core.extension'
+   Ensure   = 'Present'
+   Version  = '1.3.5.1'
+   Source   = 'STEP 3 URL'
+}
+</code></pre>
+                                    <p>Requires cChoco DSC Resource. See docs at <a href="https://github.com/chocolatey/cChoco" target="_blank" rel="noreferrer">https://github.com/chocolatey/cChoco</a>.</p>
+                                </div>
+                                <div class="tab-pane fade" id="puppet" role="tabpanel" aria-labelledby="puppet-tab">
+<pre class="language-puppet line-numbers border py-3"><code>
+package { 'chocolatey-core.extension':
+  provider => 'chocolatey',
+  ensure   => '1.3.5.1',
+  source   => 'STEP 3 URL',
+}
+</code></pre>
+                                    <p>Requires Puppet Chocolatey Provider module. See docs at <a href="https://forge.puppet.com/puppetlabs/chocolatey" target="_blank" rel="noreferrer">https://forge.puppet.com/puppetlabs/chocolatey</a>.</p>
+                                </div>
+                                <div class="tab-pane fade" id="salt" role="tabpanel" aria-labelledby="salt-tab">
+<pre class="language-powershell line-numbers border py-3"><code>
+salt '*' chocolatey.install chocolatey-core.extension version="1.3.5.1" source="STEP 3 URL"
+</code></pre>
+                                    <p>See docs at <a href="https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.chocolatey.html" target="_blank" rel="noreferrer">https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.chocolatey.html</a>.</p>
+                                </div>
+                            </div>
+                            
+                            <h4 class="mt-4">5. If applicable - Chocolatey configuration/installation</h4>
+                            <p>See <a href="/docs/features-infrastructure-automation#chocolatey-integration-implementation-with-common-configuration-managers">infrastructure management matrix</a> for Chocolatey configuration elements and examples.</p>
+                        </div>
+                    </div>
+            
+                <div class="callout callout-success">
+                    <p>This package was approved as <a href="https://chocolatey.org/faq#what-is-a-trusted-package">a trusted package</a> on 27 Aug 2020.</p>
+                </div>
+            <div class="mb-4">
+                <a class="h2 collapse show" data-toggle="collapse" href="#description" role="button" aria-expanded="true" aria-controls="description" title="Nuspec reference: description">Description</a>
+                <div class="collapse show" id="description">
+                    <hr />
+                    <p>This package provides helper functions installed as a Chocolatey extension.<br />
+These functions may be used in Chocolatey install/uninstall scripts by declaring this package a dependency in your package's nuspec.</p>
+
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <a class="h2 collapsed" data-toggle="collapse" href="#files" role="button" aria-expanded="false" aria-controls="files" title="Nuspec reference: files, optional - will default to all files next to nuspec">Files</a>
+                <div class="collapse " id="files">
+                    <hr />
+                            <div class="mb-1">
+                                        <button type="button" class="btn btn-sm btn-secondary mr-2" data-toggle="collapse" data-target=".file-path-chocolatey-core-psm1-1075625339" role="button" aria-expanded="false">Show</button>
+                                <span class="file-name">extensions\chocolatey-core.psm1</span>
+                                <div class="file-path-chocolatey-core-psm1-1075625339 collapse ">
+                                    <pre class=""><code class=""># Export functions that start with capital letter, others are private
+# Include file names that start with capital letters, ignore others
+$ScriptRoot = Split-Path $MyInvocation.MyCommand.Definition
+
+$pre = ls Function:\*
+ls &quot;$ScriptRoot\*.ps1&quot; | ? { $_.Name -cmatch &#39;^[A-Z]+&#39; } | % { . $_  }
+$post = ls Function:\*
+$funcs = compare $pre $post | select -Expand InputObject | select -Expand Name
+$funcs | ? { $_ -cmatch &#39;^[A-Z]+&#39;} | % { Export-ModuleMember -Function $_ }
+
+#Export-ModuleMember -Alias *
+</code></pre>
+                                </div>
+                            </div>
+                            <div class="mb-1">
+                                        <button type="button" class="btn btn-sm btn-secondary mr-2" data-toggle="collapse" data-target=".file-path-get-appinstalllocation-ps1-1172585997" role="button" aria-expanded="false">Show</button>
+                                <span class="file-name">extensions\Get-AppInstallLocation.ps1</span>
+                                <div class="file-path-get-appinstalllocation-ps1-1172585997 collapse ">
+                                    <pre class=""><code class="">. &quot;$PSScriptRoot\Get-UninstallRegistryKey.ps1&quot;
+&lt;#
+.SYNOPSIS
+    Get application install location
+
+.DESCRIPTION
+    Function tries to find install location in multiple places. It returns $null if all fail. The following
+    locations are tried:
+      - local and machine (x32 &amp; x64) various Uninstall keys
+      - x32 &amp; x64 Program Files up to the 2nd level of depth
+      - native commands available via PATH
+      - locale and machine registry key SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths
+
+    Use Verbose parameter to see which of the above locations was used for the result, if any.
+
+.EXAMPLE
+    PS&gt; Get-AppInstallLocation choco
+
+    Returns the install location of the application &#39;choco&#39;.
+
+.OUTPUTS
+    [String] or $null
+#&gt;
+function Get-AppInstallLocation {
+    [CmdletBinding()]
+    param(
+        # Regular expression pattern
+        [ValidateNotNullOrEmpty()]
+        [string] $AppNamePattern,
+
+        # Allows splatting with arguments that do not apply and future expansion. Do not use directly.
+        [parameter(ValueFromRemainingArguments = $true)]
+        [Object[]] $IgnoredArguments
+    )
+
+    function strip($path) { if ($path.EndsWith(&#39;\&#39;)) { return $path -replace &#39;.$&#39; } else { $path } }
+
+    function is_dir( $path ) { $path -and (gi $path -ea 0).PsIsContainer -eq $true }
+
+    $ErrorActionPreference = &quot;SilentlyContinue&quot;
+
+    Write-Verbose &quot;Trying local and machine (x32 &amp; x64) Uninstall keys&quot;
+    [array] $key = Get-UninstallRegistryKey $AppNamePattern
+    if ($key.Count -eq 1) {
+        Write-Verbose &quot;Trying Uninstall key property &#39;InstallLocation&#39;&quot;
+        $location = $key.InstallLocation
+        if (is_dir $location) { return strip $location }
+
+        Write-Verbose &quot;Trying Uninstall key property &#39;UninstallString&#39;&quot;
+        $location = $key.UninstallString
+        if ($location) { $location = $location.Replace(&#39;&quot;&#39;, &#39;&#39;) | Split-Path }
+        if (is_dir $location) { return strip $location }
+
+        Write-Verbose &quot;Trying Uninstall key property &#39;DisplayIcon&#39;&quot;
+        $location = $key.DisplayIcon
+        if ($location) { $location = Split-Path $location }
+        if (is_dir $location) { return strip $location }
+    } else { Write-Verbose &quot;Found $($key.Count) keys, aborting this method&quot; }
+
+    $dirs = $Env:ProgramFiles, &quot;$Env:ProgramFiles\*\*&quot;
+    if (Get-ProcessorBits 64) { $dirs += ${ENV:ProgramFiles(x86)}, &quot;${ENV:ProgramFiles(x86)}\*\*&quot; }
+    Write-Verbose &quot;Trying Program Files with 2 levels depth: $dirs&quot;
+    $location = (ls $dirs | ? {$_.PsIsContainer}) -match $AppNamePattern | select -First 1 | % {$_.FullName}
+    if (is_dir $location) { return strip $location }
+
+    Write-Verbose &quot;Trying native commands on PATH&quot;
+    $location = (Get-Command -CommandType Application) -match $AppNamePattern | select -First 1 | % { Split-Path $_.Source }
+    if (is_dir $location) { return strip $location }
+
+    $appPaths =  &quot;\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths&quot;
+    Write-Verbose &quot;Trying Registry: $appPaths&quot;
+    $location = (ls &quot;HKCU:\$appPaths&quot;, &quot;HKLM:\$appPaths&quot;) -match $AppNamePattern | select -First 1
+    if ($location) { $location = Split-Path $location }
+    if (is_dir $location) { return strip $location }
+
+    Write-Verbose &quot;No location found&quot;
+}
+</code></pre>
+                                </div>
+                            </div>
+                            <div class="mb-1">
+                                        <button type="button" class="btn btn-sm btn-secondary mr-2" data-toggle="collapse" data-target=".file-path-get-availabledriveletter-ps1-1761317660" role="button" aria-expanded="false">Show</button>
+                                <span class="file-name">extensions\Get-AvailableDriveLetter.ps1</span>
+                                <div class="file-path-get-availabledriveletter-ps1-1761317660 collapse ">
+                                    <pre class=""><code class="">&lt;#
+.SYNOPSIS
+  Get a &#39;free&#39; drive letter
+
+.DESCRIPTION
+  Get a not yet in-use drive letter that can be used for mounting
+
+.EXAMPLE
+  Get-AvailableDriveLetter
+
+.EXAMPLE
+  Get-AvailableDriveLetter &#39;X&#39;
+  (do not return X, even if it&#39;d be the next choice)
+
+.INPUTS
+  specific drive letter(s) that will be excluded as potential candidates
+
+.OUTPUTS
+  System.String (single drive-letter character)
+
+.LINK
+  http://stackoverflow.com/questions/12488030/getting-a-free-drive-letter/29373301#29373301
+#&gt;
+function Get-AvailableDriveLetter {
+  param (
+    [char[]]$ExcludedLetters,
+
+    # Allows splatting with arguments that do not apply and future expansion. Do not use directly.
+    [parameter(ValueFromRemainingArguments = $true)]
+    [Object[]] $IgnoredArguments
+  )
+
+  $Letter = [int][char]&#39;C&#39;
+  $i = @()
+
+  #getting all the used Drive letters reported by the Operating System
+  $(Get-PSDrive -PSProvider filesystem) | %{$i += $_.name}
+
+  #Adding the excluded letter
+  $i+=$ExcludedLetters
+
+  while($i -contains $([char]$Letter)){$Letter++}
+
+  if ($Letter -gt [char]&#39;Z&#39;) {
+    throw &quot;error: no drive letter available!&quot;
+  }
+  Write-Verbose &quot;available drive letter: &#39;$([char]$Letter)&#39;&quot;
+  Return $([char]$Letter)
+}
+
+</code></pre>
+                                </div>
+                            </div>
+                            <div class="mb-1">
+                                        <button type="button" class="btn btn-sm btn-secondary mr-2" data-toggle="collapse" data-target=".file-path-get-effectiveproxy-ps1-1717218052" role="button" aria-expanded="false">Show</button>
+                                <span class="file-name">extensions\Get-EffectiveProxy.ps1</span>
+                                <div class="file-path-get-effectiveproxy-ps1-1717218052 collapse ">
+                                    <pre class=""><code class="">&lt;#
+.SYNOPSIS
+    Get the current proxy using several methods
+
+.DESCRIPTION
+    Function tries to find the current proxy using several methods, in the given order:
+        - $env:chocolateyProxyLocation variable
+        - $env:http_proxy environment variable
+        - IE proxy
+        - Chocolatey config
+        - Winhttp proxy
+        - WebClient proxy
+
+    Use Verbose parameter to see which of the above locations was used for the result, if any.
+    The function currently doesn&#39;t handle the proxy username and password.
+
+.OUTPUTS
+    [String] in the form of http://&lt;proxy&gt;:&lt;port&gt;
+#&gt;
+function Get-EffectiveProxy(){
+
+    # Try chocolatey proxy environment vars
+    if ($env:chocolateyProxyLocation) {
+        Write-Verbose &quot;Using `$Env:chocolateyProxyLocation&quot;
+        return $env:chocolateyProxyLocation
+    }
+
+    # Try standard Linux variable
+    if ($env:http_proxy) {
+        Write-Verbose &quot;Using `$Env:http_proxy&quot;
+        return $env:http_proxy
+    }
+    
+    # Try to get IE proxy
+    $key = &quot;HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings&quot;
+    $r = Get-ItemProperty $key
+    if ($r.ProxyEnable -and $r.ProxyServer) {
+        Write-Verbose &quot;Using IE proxy settings&quot;
+        return &quot;http://&quot; + $r.ProxyServer
+    }
+    
+    # Try chocolatey config file
+    [xml] $cfg = gc $env:ChocolateyInstall\config\chocolatey.config
+    $p = $cfg.chocolatey.config | % { $_.add } | ? { $_.key -eq &#39;proxy&#39; } | select -Expand value
+    if ($p) {
+        Write-Verbose &quot;Using choco config proxy&quot;
+        return $p
+    }
+
+    # Try winhttp proxy
+    (netsh.exe winhttp show proxy) -match &#39;Proxy Server\(s\)&#39; | set proxy 
+    $proxy = $proxy -split &#39; :&#39; | select -Last 1
+    $proxy = $proxy.Trim()
+    if ($proxy) {
+        Write-Verbose &quot;Using winhttp proxy server&quot;
+        return &quot;http://&quot; + $proxy
+    }
+
+    # Try using WebClient
+    $url = &quot;http://chocolatey.org&quot;
+    $client = New-Object System.Net.WebClient
+    if ($client.Proxy.IsBypassed($url)) { return $null }
+
+    Write-Verbose &quot;Using WebClient proxy&quot;
+    return &quot;http://&quot; + $client.Proxy.GetProxy($url).Authority
+}
+</code></pre>
+                                </div>
+                            </div>
+                            <div class="mb-1">
+                                        <button type="button" class="btn btn-sm btn-secondary mr-2" data-toggle="collapse" data-target=".file-path-get-packagecachelocation-ps1-500690656" role="button" aria-expanded="false">Show</button>
+                                <span class="file-name">extensions\Get-PackageCacheLocation.ps1</span>
+                                <div class="file-path-get-packagecachelocation-ps1-500690656 collapse ">
+                                    <pre class=""><code class="">&lt;#
+.SYNOPSIS
+    Get temporary location for the package based on its name and version.
+
+.DESCRIPTION
+    The function returns package cache directory within $Env:TEMP. It will not create the directory
+    if it doesn&#39;t exist.
+
+    This function is useful when you have to obtain the file using `Get-ChocolateyWebFile` in order
+    to perform certain installation steps that other helpers can&#39;t do.
+
+.EXAMPLE
+    Get-PackageCacheLocation
+
+.OUTPUTS
+    [String]
+
+.LINKS
+    Get-ChocolateyWebFile
+#&gt;
+function Get-PackageCacheLocation {
+    [CmdletBinding()]
+    param (
+        # Name of the package, by default $Env:ChocolateyPackageName
+        [string] $Name    = $Env:ChocolateyPackageName,
+        # Version of the package, by default $Env:ChocolateyPackageVersion
+        [string] $Version = $Env:ChocolateyPackageVersion,
+        # Allows splatting with arguments that do not apply and future expansion. Do not use directly.
+        [parameter(ValueFromRemainingArguments = $true)]
+        [Object[]] $IgnoredArguments
+    )
+
+    if (!$Name) { Write-Warning &#39;Environment variable $Env:ChocolateyPackageName is not set&#39; }
+    $res = Join-Path $Env:TEMP $Name
+
+    if (!$Version) { Write-Warning &#39;Environment variable $Env:ChocolateyPackageVersion is not set&#39; }
+    $res = Join-Path $res $Version
+
+    $res
+}
+</code></pre>
+                                </div>
+                            </div>
+                            <div class="mb-1">
+                                        <button type="button" class="btn btn-sm btn-secondary mr-2" data-toggle="collapse" data-target=".file-path-get-packageparameters-ps1-1353216246" role="button" aria-expanded="false">Show</button>
+                                <span class="file-name">extensions\Get-PackageParameters.ps1</span>
+                                <div class="file-path-get-packageparameters-ps1-1353216246 collapse ">
+                                    <pre class=""><code class="">&lt;#
+.SYNOPSIS
+    Parses parameters of the package
+
+.EXAMPLE
+    Get-PackageParameters &quot;/Shortcut /InstallDir:&#39;c:\program files\xyz&#39; /NoStartup&quot; | set r
+    if ($r.Shortcut) {... }
+    Write-Host $r.InstallDir
+
+.OUTPUTS
+    [HashTable]
+#&gt;
+function Get-PackageParameters {
+    [CmdletBinding()]
+    param(
+       [string] $Parameters = $Env:ChocolateyPackageParameters,
+       # Allows splatting with arguments that do not apply and future expansion. Do not use directly.
+       [parameter(ValueFromRemainingArguments = $true)]
+       [Object[]] $IgnoredArguments
+    )
+
+    $res = @{}
+
+    $re = &quot;\/([a-zA-Z0-9]+)(:[`&quot;&#39;].+?[`&quot;&#39;]|[^ ]+)?&quot;
+    $results = $Parameters | Select-String $re -AllMatches | select -Expand Matches
+    foreach ($m in $results) {
+        if (!$m) { continue } # must because of posh 2.0 bug: https://github.com/chocolatey/chocolatey-coreteampackages/issues/465
+
+        $a = $m.Value -split &#39;:&#39;
+        $opt = $a[0].Substring(1); $val = $a[1..100] -join &#39;:&#39;
+        if ($val -match &#39;^(&quot;.+&quot;)|(&#39;&#39;.+&#39;&#39;)$&#39;) {$val = $val -replace &#39;^.|.$&#39;}
+        $res[ $opt ] = if ($val) { $val } else { $true }
+    }
+    $res
+}
+</code></pre>
+                                </div>
+                            </div>
+                            <div class="mb-1">
+                                        <button type="button" class="btn btn-sm btn-secondary mr-2" data-toggle="collapse" data-target=".file-path-get-uninstallregistrykey-ps1-368003392" role="button" aria-expanded="false">Show</button>
+                                <span class="file-name">extensions\Get-UninstallRegistryKey.ps1</span>
+                                <div class="file-path-get-uninstallregistrykey-ps1-368003392 collapse ">
+                                    <pre class=""><code class="">&lt;#
+.SYNOPSIS
+    Retrieve registry key(s) for system-installed applications from an exact or wildcard search.
+
+.DESCRIPTION
+    This function will attempt to retrieve a matching registry key for an already installed application,
+    usually to be used with a chocolateyUninstall.ps1 automation script.
+
+    The function also prevents `Get-ItemProperty` from failing when handling wrongly encoded registry keys.
+
+.PARAMETER SoftwareName
+    Part or all of the Display Name as you see it in Programs and Features.
+    It should be enough to be unique.
+    The syntax follows the rules of the PowerShell `-like` operator, so the `*` character is interpreted
+    as a wildcard, which matches any (zero or more) characters.
+
+    If the display name contains a version number, such as &quot;Launchy (2.5)&quot;, it is recommended you use a
+    fuzzy search `&quot;Launchy (*)&quot;` (the wildcard `*`) so if Launchy auto-updates or is updated outside
+    of chocolatey, the uninstall script will not fail.
+
+    Take care not to abuse fuzzy/glob pattern searches. Be conscious of programs that may have shared
+    or common root words to prevent overmatching. For example, &quot;SketchUp*&quot; would match two keys with software
+    names &quot;SketchUp 2016&quot; and &quot;SketchUp Viewer&quot; that are different programs released by the same company.
+
+.PARAMETER IgnoredArguments
+    Allows splatting with arguments that do not apply and future expansion. Do not use directly.
+
+.INPUTS
+    System.String
+
+.OUTPUTS
+    PSCustomObject
+
+.EXAMPLE
+    [array]$key = Get-UninstallRegistryKey -SoftwareName &quot;VLC media player&quot;
+    $key.UninstallString
+
+    Exact match: software name in Programs and Features is &quot;VLC media player&quot;
+
+.EXAMPLE
+    [array]$key = Get-UninstallRegistryKey -SoftwareName &quot;Gpg4win (*)&quot;
+    $key.UninstallString
+
+    Version match: software name is &quot;Gpg4Win (2.3.0)&quot;
+
+.EXAMPLE
+    [array]$key = Get-UninstallRegistryKey -SoftwareName &quot;SketchUp [0-9]*&quot;
+    $key.UninstallString
+
+    Version match: software name is &quot;SketchUp 2016&quot;
+    Note that the similar software name &quot;SketchUp Viewer&quot; would not be matched.
+
+.LINK
+    Uninstall-ChocolateyPackage
+#&gt;
+function Get-UninstallRegistryKey {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string] $SoftwareName,
+        [parameter(ValueFromRemainingArguments = $true)]
+        [Object[]] $IgnoredArguments
+    )
+    Write-Debug &quot;Running &#39;Get-UninstallRegistryKey&#39; for `&#39;$env:ChocolateyPackageName`&#39; with SoftwareName:`&#39;$SoftwareName`&#39;&quot;;
+
+    $ErrorActionPreference = &#39;Stop&#39;
+    $local_key       = &#39;HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*&#39;
+    $machine_key     = &#39;HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*&#39;
+    $machine_key6432 = &#39;HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*&#39;
+
+    Write-Verbose &quot;Retrieving all uninstall registry keys&quot;
+    [array]$keys = Get-ChildItem -Path @($machine_key6432, $machine_key, $local_key) -ea 0
+    Write-Debug &quot;Registry uninstall keys on system: $($keys.Count)&quot;
+
+    Write-Debug &quot;Error handling check: `&#39;Get-ItemProperty`&#39; fails if a registry key is encoded incorrectly.&quot;
+    [int]$maxAttempts = $keys.Count
+    for ([int]$attempt = 1; $attempt -le $maxAttempts; $attempt++)
+    {
+        $success = $false
+
+        $keyPaths = $keys | Select-Object -ExpandProperty PSPath
+        try {
+            [array]$foundKey = Get-ItemProperty -Path $keyPaths -ea 0 | ? { $_.DisplayName -like $SoftwareName }
+            $success = $true
+        } catch {
+            Write-Debug &quot;Found bad key.&quot;
+            foreach ($key in $keys){ try{ Get-ItemProperty $key.PsPath &gt; $null } catch { $badKey = $key.PsPath }}
+            Write-Verbose &quot;Skipping bad key: $badKey&quot;
+            [array]$keys = $keys | ? { $badKey -NotContains $_.PsPath }
+        }
+
+        if ($success) { break; }
+        if ($attempt -eq 10) {
+            Write-Warning &quot;Found more than 10 bad registry keys. Run command again with `&#39;--verbose --debug`&#39; for more info.&quot;
+            Write-Debug &quot;Each key searched should correspond to an installed program. It is very unlikely to have more than a few programs with incorrectly encoded keys, if any at all. This may be indicative of one or more corrupted registry branches.&quot;
+        }
+    }
+
+    Write-Debug &quot;Found $($foundKey.Count) uninstall registry key(s) with SoftwareName:`&#39;$SoftwareName`&#39;&quot;;
+    return $foundKey
+}
+</code></pre>
+                                </div>
+                            </div>
+                            <div class="mb-1">
+                                        <button type="button" class="btn btn-sm btn-secondary mr-2" data-toggle="collapse" data-target=".file-path-get-webcontent-ps1-651845951" role="button" aria-expanded="false">Show</button>
+                                <span class="file-name">extensions\Get-WebContent.ps1</span>
+                                <div class="file-path-get-webcontent-ps1-651845951 collapse ">
+                                    <pre class=""><code class="">&lt;#
+.SYNOPSIS
+  Download file with choco internals
+
+.DESCRIPTION
+  This function will download a file from specified url and return it as a string.
+  This command should be a replacement for ubiquitous WebClient in install scripts.
+
+  The benefit of using this command instead of WebClient is that it correctly handles
+  system or explicit proxy.
+
+.EXAMPLE
+  PS C:\&gt; $s = Get-WebContent &quot;http://example.com&quot;
+  PS C:\&gt; $s -match &#39;Example Domain&#39;
+  True
+
+  First command downloads html content from http://example.com and stores it in $s.
+  Now you can parse and match it as a string.
+
+.EXAMPLE
+  PS C:\&gt; $opts = @{ Headers = @{ Referer = &#39;http://google.com&#39; } }
+  PS C:\&gt; $s = Get-WebContent -url &quot;http://example.com&quot; -options $opts
+
+  You can set headers for http request this way.
+
+.INPUTS
+  None
+
+.OUTPUTS
+  System.String
+
+.NOTES
+  This function can only return string content.
+  If you want to download a binary content, please use Get-WebFile.
+
+.LINK
+  Get-WebFile
+#&gt;
+function Get-WebContent {
+    [CmdletBinding()]
+    param(
+        # Url to download
+        [string]$Url,
+
+        # Additional options for http request.For now only Headers property supported.
+        [hashtable]$Options,
+
+        # Allows splatting with arguments that do not apply and future expansion. Do not use directly.
+        [parameter(ValueFromRemainingArguments = $true)]
+        [Object[]] $IgnoredArguments
+    )
+
+    $filePath =  get_temp_filepath
+    Get-WebFile -Url $Url -FileName $filePath -Options $Options 3&gt;$null
+
+    $fileContent = Get-Content $filePath -ReadCount 0 | Out-String
+    Remove-Item $filePath
+
+    $fileContent
+}
+
+function get_temp_filepath() {
+    $tempDir = Get-PackageCacheLocation
+    $fileName = [System.IO.Path]::GetRandomFileName()
+    Join-Path $tempDir $fileName
+}
+
+</code></pre>
+                                </div>
+                            </div>
+                            <div class="mb-1">
+                                        <button type="button" class="btn btn-sm btn-secondary mr-2" data-toggle="collapse" data-target=".file-path-register-application-ps1-1227265258" role="button" aria-expanded="false">Show</button>
+                                <span class="file-name">extensions\Register-Application.ps1</span>
+                                <div class="file-path-register-application-ps1-1227265258 collapse ">
+                                    <pre class=""><code class="">&lt;#
+.SYNOPSIS
+    Register application in the system
+
+.DESCRIPTION
+    The function will register application in the system using App Paths registry key so that you
+    can start it by typing its registred name in the Windows Start menu on using run dialog (Win + R).
+
+    To make applications available in the shell, add to your profile Set-AppKeyAliases function.
+
+.EXAMPLE
+    Register-Application &#39;c:\windows\notepad.exe&#39;
+
+    Register application using name derived from its file name.
+
+.EXAMPLE
+    Register-Application &#39;c:\windows\notepad.exe&#39; -Name ntp
+
+    Register application using explicit name.
+
+.LINK
+   Set-AppKeyAliases        - https://github.com/majkinetor/posh/blob/master/MM_Admin/Set-AppKeyAliases.ps1
+   Application Registration - https://msdn.microsoft.com/en-us/library/windows/desktop/ee872121(v=vs.85).aspx
+
+#&gt;
+function Register-Application{
+    [CmdletBinding()]
+    param(
+        # Full path of the executable to register.
+        [Parameter(Mandatory=$true)]
+        [string]$ExePath,
+
+        # Optional name to register with. By default exe name will be used.
+        [string]$Name,
+
+        # Register application only for the current user. By default registration is for the machine.
+        [switch]$User,
+
+        # Allows splatting with arguments that do not apply and future expansion. Do not use directly.
+        [parameter(ValueFromRemainingArguments = $true)]
+        [Object[]] $IgnoredArguments
+    )
+
+    if (!(Test-Path $ExePath)) { throw &quot;Path doesn&#39;t exist: $ExePath&quot; }
+    if (!$Name) { $Name = Split-Path $ExePath -Leaf } else { $Name = $Name + &#39;.exe&#39; }
+
+    $appPathKey = &quot;HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\$Name&quot;
+    if ($User) { $appPathKey = &quot;HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\$Name&quot; }
+
+    If (!(Test-Path $AppPathKey)) { New-Item &quot;$AppPathKey&quot; | Out-Null }
+    Set-ItemProperty -Path $AppPathKey -Name &quot;(Default)&quot; -Value $ExePath
+}
+</code></pre>
+                                </div>
+                            </div>
+                            <div class="mb-1">
+                                        <button type="button" class="btn btn-sm btn-secondary mr-2" data-toggle="collapse" data-target=".file-path-remove-process-ps1-267861318" role="button" aria-expanded="false">Show</button>
+                                <span class="file-name">extensions\Remove-Process.ps1</span>
+                                <div class="file-path-remove-process-ps1-267861318 collapse ">
+                                    <pre class=""><code class="">&lt;#
+.SYNOPSIS
+    Ensure that process is stopped in reliable way
+
+.DESCRIPTION
+    Close the processes matching filters gracefully first, then forcefully.
+    If no process is found, function will simply do and return nothing.
+
+.EXAMPLE
+    notepad; Remove-Process notepad -PathFilter &#39;system32&#39;
+
+    Close main window of notepad that has &#39;system32&#39; word in its path
+
+.EXAMPLE
+    Remove-Process notepad -WaitFor 30
+    notepad; notepad  #in another shell
+
+    Close all instances of notepad but wait for them up to 30 seconds to start
+
+.OUTPUTS
+    Array of closeed processes with details about each one.
+
+.NOTES
+    https://github.com/chocolatey-community/chocolatey-coreteampackages/issues/1364
+#&gt;
+
+function Remove-Process {
+    param(
+        # RegEx expression of process name, returned by Get-Process function
+        [string] $NameFilter,
+
+        # RegEx expression of process path, returned by Get-Process function
+        [string] $PathFilter,
+
+        # Wait for process to start number of seconds
+        # Function will try to find process every second until timeout.
+        [int] $WaitFor,
+
+        # Close/Kill child processes, by default they are filtered out as
+        # parent-child relationship usually have its own heartbeat feature
+        [switch] $WithChildren
+    )
+
+    function getp {
+        foreach ($p in Get-Process) {
+            $b1 = if ($NameFilter) { $p.ProcessName -match $NameFilter }
+            $b2 = if ($PathFilter) { $p.Path        -match $PathFilter }
+            $b  = if (($b1 -ne $null) -and ($b2 -ne $null)) { $b1 -and $b2 } else { $b1 -or $b2 }
+            if (!$b) { continue }
+
+            $w = Get-WmiObject win32_process -Filter &quot;ProcessId = $($p.Id)&quot;
+            [PSCustomObject]@{
+                Id          = $p.Id
+                ParentId    = $w.ParentProcessId
+                Name        = $p.ProcessName
+                Path        = $p.Path
+                CommandLine = $w.CommandLine
+                Process     = $p
+                Username    = $w.GetOwner().Domain + &quot;\&quot;+ $w.GetOwner().User
+            }
+        }
+    }
+
+    $proc = getp
+    if (!$proc -and $WaitFor) {
+        Write-Verbose &quot;Waiting for process up to $WaitFor seconds&quot;
+        for ($i=0; $i -lt $WaitFor; $i++) { Start-Sleep 1; $proc = getp; if ($proc) {break} }
+    }
+    if (!$proc) { return }
+
+    # Process might spawn multiple children, typical for browsers; remove all children as parent will handle them
+    if (!$WithChildren) {
+        Write-Verbose &quot;Remove all children processes&quot;
+        $proc = $proc | ? { $proc.Id -notcontains $_.ParentId }
+    }
+
+    foreach ($p in $proc)  {
+        Write-Verbose &quot;Trying to close app &#39;$($p.Name)&#39; run by user &#39;$($p.Username)&#39;&quot;
+
+        if ( $p.Process.CloseMainWindow() ) {
+            # wait for app to shut down for some time, max 5s
+            for ($i=0; $i -lt 5; $i++) {
+                Start-Sleep 1
+                $p2 = ps -PID $p.id -ea 0
+                if (!$p2) { break }
+            }
+        }
+
+        # Return value of CloseMainWindow() &#39;True&#39; is not reliable
+        # so if process is still active kill it
+        $p2 = ps -PID $p.id -ea 0
+        if (($p.Process.Name -eq $p2.Name) -and ($p.Process.StartTime -eq $p2.StartTime)) {
+            $p | Stop-Process -ea STOP
+            Start-Sleep 1 # Running to fast here still gets the killed process in next line
+        }
+
+        $p2 = ps -PID $p.id -ea 0
+        if (($p.Process.Name -eq $p2.Name) -and ($p.Process.StartTime -eq $p2.StartTime)) {
+            Write-Warning &quot;Process &#39;$($p.Name)&#39; run by user &#39;$($p.Username)&#39; can&#39;t be closed&quot;
+        }
+    }
+    $proc
+}
+</code></pre>
+                                </div>
+                            </div>
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <a class="h2 collapsed" data-toggle="collapse" href="#virus" role="button" aria-expanded="false" aria-controls="virus" title="Virus Scan Results">Virus Scan Results</a>
+                <div class="collapse " id="virus">
+                        <hr />
+                            <p class="font-weight-bold"><a href="/users/account/LogOn">Log in</a> or click on link to see number of positives.</p>
+                        <ul class="list-unstyled list-virus-scan">
+                                <li class="">
+                                    <a title="full sha256: 5ecef3b776508cebc4b52e9ac7f04d213c2045a6765f12e17545a5fbe2f41928" href="https://www.virustotal.com/file/5ecef3b776508cebc4b52e9ac7f04d213c2045a6765f12e17545a5fbe2f41928/analysis/">chocolatey-core.extension.1.3.5.1.nupkg (5ecef3b77650)</a>
+                                        - ## /  60                                </li>
+                        </ul>
+                        <div class="callout callout-warning">
+                            <p>In cases where actual malware is found, the packages are subject to removal. Software sometimes has false positives. Moderators do not necessarily validate the safety of the underlying software, only that a package retrieves software from the official distribution point and/or validate embedded software against official distribution point (where distribution rights allow redistribution).</p>
+                            <p>Chocolatey Pro provides <a href="/docs/features-virus-check">runtime protection</a> from possible malware.</p>
+                        </div>
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <a class="h2 collapsed" data-toggle="collapse" href="#versionhistory" role="button" aria-expanded="false" aria-controls="versionhistory" title="Version History">Version History</a>
+                <div class="collapse " id="versionhistory">
+                    <div class="table-responsive-sm">
+                        <table class="table table-hover mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Version</th>
+                                    <th scope="col">Downloads</th>
+                                    <th scope="col">Last Updated</th>
+                                    <th scope="col" last>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+    <tr class="versionTableRow recommended " style="display: table-row">
+        <td class="version" title="Latest Version">
+                <span>Chocolatey Core Extensions 1.3.5.1</span>
+        </td>
+        <td>6533810</td>
+        <td>Thursday, November 21, 2019</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow " style="display: table-row">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/1.3.5">Chocolatey Core Extensions 1.3.5</a>
+        </td>
+        <td>256578</td>
+        <td>Thursday, November 14, 2019</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow " style="display: table-row">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/1.3.4">Chocolatey Core Extensions 1.3.4</a>
+        </td>
+        <td>461377</td>
+        <td>Wednesday, October 30, 2019</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow " style="display: table-row">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/1.3.3">Chocolatey Core Extensions 1.3.3</a>
+        </td>
+        <td>9332047</td>
+        <td>Wednesday, October 11, 2017</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow " style="display: table-row">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/1.3.2">Chocolatey Core Extensions 1.3.2</a>
+        </td>
+        <td>18697</td>
+        <td>Tuesday, October 10, 2017</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow " style="display: table-row">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/1.3.1">Chocolatey Core Extensions 1.3.1</a>
+        </td>
+        <td>1512975</td>
+        <td>Tuesday, May 23, 2017</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow " style="display: table-row">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/1.3.0">Chocolatey Core Extensions 1.3.0</a>
+        </td>
+        <td>325862</td>
+        <td>Friday, April 21, 2017</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow " style="display: table-row">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/1.2.0">Chocolatey Core Extensions 1.2.0</a>
+        </td>
+        <td>380174</td>
+        <td>Monday, March 20, 2017</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow " style="display: table-row">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/1.1.0">Chocolatey Core Extensions 1.1.0</a>
+        </td>
+        <td>224920</td>
+        <td>Thursday, February 23, 2017</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow " style="display: table-row">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/1.0.7">Chocolatey Core Extensions 1.0.7</a>
+        </td>
+        <td>199824</td>
+        <td>Monday, February 13, 2017</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow versionTableRowMore" style="display: none">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/1.0.6">Chocolatey Core Extensions 1.0.6</a>
+        </td>
+        <td>111539</td>
+        <td>Wednesday, February 1, 2017</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow versionTableRowMore" style="display: none">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/1.0.5">Chocolatey Core Extensions 1.0.5</a>
+        </td>
+        <td>82696</td>
+        <td>Tuesday, January 24, 2017</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow versionTableRowMore" style="display: none">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/1.0.4">Chocolatey Core Extensions 1.0.4</a>
+        </td>
+        <td>329165</td>
+        <td>Monday, December 12, 2016</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow versionTableRowMore" style="display: none">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/1.0.3">Chocolatey Core Extensions 1.0.3</a>
+        </td>
+        <td>61175</td>
+        <td>Friday, December 9, 2016</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow versionTableRowMore" style="display: none">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/1.0.2">Chocolatey Core Extensions 1.0.2</a>
+        </td>
+        <td>35302</td>
+        <td>Wednesday, December 7, 2016</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow versionTableRowMore" style="display: none">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/1.0.1">Chocolatey Core Extensions 1.0.1</a>
+        </td>
+        <td>45602</td>
+        <td>Friday, December 2, 2016</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow versionTableRowMore" style="display: none">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/1.0">Chocolatey Core Extensions 1.0</a>
+        </td>
+        <td>141205</td>
+        <td>Sunday, November 13, 2016</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow versionTableRowMore" style="display: none">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/0.1.3">Chocolatey Core Extensions 0.1.3</a>
+        </td>
+        <td>129987</td>
+        <td>Monday, October 24, 2016</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow versionTableRowMore" style="display: none">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/0.1.2">Chocolatey Core Extensions 0.1.2</a>
+        </td>
+        <td>17885</td>
+        <td>Sunday, October 23, 2016</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow versionTableRowMore" style="display: none">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/0.1.1">Chocolatey Core Extensions 0.1.1</a>
+        </td>
+        <td>375</td>
+        <td>Sunday, October 23, 2016</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+
+    <tr class="versionTableRow versionTableRowMore" style="display: none">
+        <td class="version" >
+                <a href="/packages/chocolatey-core.extension/0.1.0">Chocolatey Core Extensions 0.1.0</a>
+        </td>
+        <td>441</td>
+        <td>Saturday, October 22, 2016</td>
+    
+                <td><span class="fas fa-check text-success"></span> Approved</td>
+    
+    </tr>
+                            </tbody>
+                        </table>
+                            <button type="button" class="btn btn-sm btn-secondary" onclick="if($(this).is(':contains(&quot;Hide&quot;)')){$('.versionTableRowMore').hide();}else{$('.versionTableRowMore').show();}">Show Additional Versions</button>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="mb-4">
+                    <a class="h2 collapsed" data-toggle="collapse" href="#copyright" role="button" aria-expanded="false" aria-controls="copyright" title="Nuspec reference: copyright">Copyright</a>
+                    <div class="collapse" id="copyright">
+                        <hr />
+                        <p class="mb-0">&#169; 2016 Chocolatey Core Team Package Contributors</p>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <a class="h2 collapsed" data-toggle="collapse" href="#releasenotes" role="button" aria-expanded="false" aria-controls="releasenotes" title="Nuspec reference: releaseNotes">Release Notes</a>
+                    <div class="collapse" id="releasenotes">
+                        <hr />
+                        <p><a href="https://github.com/chocolatey/chocolatey-coreteampackages/tree/master/extensions/chocolatey-core.extension/CHANGELOG.md" rel="nofollow">https://github.com/chocolatey/chocolatey-coreteampackages/tree/master/extensions/chocolatey-core.extension/CHANGELOG.md</a></p>
+
+                    </div>
+                </div>
+            <div class="mb-4">
+                <a class="h2 collapsed" data-toggle="collapse" href="#dependencies" role="button" aria-expanded="false" aria-controls="dependencies" title="Nuspec reference: dependencies">Dependencies</a>
+                <div class="collapse " id="dependencies">
+                    <hr />
+                        <p>This package has no dependencies.</p>
+
+                </div>
+            </div>
+            
+            <div>
+                <a class="h2 collapse show" data-toggle="collapse" href="#discussion" role="button" aria-expanded="true" aria-controls="discussion" title=">Discussion for the Chocolatey Core Extensions Package">Discussion for the Chocolatey Core Extensions Package</a>
+                <div class="collapse show" id="discussion">
+                    <hr />
+                    <h3>Ground Rules:</h3>
+                    <ul>
+                        <li>This discussion is only about Chocolatey Core Extensions and the Chocolatey Core Extensions package. If you have feedback for Chocolatey, please contact the <a href="https://groups.google.com/group/chocolatey">Google Group</a>.</li>
+                        <li>This discussion will carry over multiple versions. If you have a comment about a particular version, please note that in your comments.</li>
+                        <li>
+                            The maintainers of this Chocolatey Package will be notified about new comments that are posted to this Disqus thread, however, it is NOT a guarantee that you
+                            will get a response. If you do not hear back from the maintainers after posting a message below, please follow up by using the link
+                            on the left side of this page or follow this link to <a href="/packages/chocolatey-core.extension/ContactOwners">contact maintainers</a>.
+                            If you still hear nothing back, please follow the <a href="/docs/package-triage-process">package triage process</a>.
+                        </li>
+                        <li>Tell us what you love about the package or Chocolatey Core Extensions, or tell us what needs improvement.</li>
+                        <li>Share your experiences with the package, or extra configuration or gotchas that you've found.</li>
+                        <li>If you use a url, the comment will be flagged for moderation until you've been whitelisted. Disqus moderated comments are approved on a weekly schedule if not sooner. It could take between 1-5 days for your comment to show up.</li>
+                    </ul>
+                    <a name="disqus"></a>
+                    <div id="disqus_thread"></div>
+                    <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    </main>
+    <footer>
+        <section id="mc_embed_signup" class="container-fluid bg-medium py-2">
+    <form action="//chocolatey.us8.list-manage.com/subscribe/post?u=86a6d80146a0da7f2223712e4&amp;id=73b018498d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <div class="form-row align-items-center justify-content-center">
+            <div class="col-12 col-md-auto text-center text-md-left">
+                <h3 class="mb-0">Signup for the Newsletter!</h3>
+            </div>
+            <div class="col-12 col-md-3">
+                <input type="email" title="Email Address for Newsletter" class="form-control email mt-2 mt-md-0" id="mce-EMAIL" placeholder="Your e-mail address" value="" name="EMAIL" required>
+            </div>
+            <div style="position: absolute; left: -5000px;">
+                <input title="Invisible Field" type="text" name="b_86a6d80146a0da7f2223712e4_73b018498d" tabindex="-1" value="">
+            </div>
+            <div class="col-12 col-md-auto">
+                <button type="submit" class="btn btn-light col-12 mt-2 mt-md-0" id="mc-embedded-subscribe"><strong>Subscribe</strong></button>
+            </div>
+        </div>
+        <div class="form-row text-center mt-1 mt-md-0">
+            <div class="col-12">
+                <p class="mb-0"><i>Be the first to know about upcoming features, security releases, and news about Chocolatey.</i></p>
+            </div>
+        </div>
+    </form>
+</section>
+        <section class="container py-5 text-center text-md-left">
+    <div class="row">
+        <div class="col-md-3 mx-auto">
+            <h3>Overview</h3>
+            <ul class="list-unstyled mb-0">
+                <li><a href="/about">About</a></li>
+                <li><a href="/courses">Getting Started Guide</a></li>
+                <li><a href="/why-chocolatey">Why Chocolatey</a></li>
+                <li><a href="/how-chocolatey-works">How Chocolatey Works</a></li>
+                <li><a href="/docs/security">Security</a></li>
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="/kickstarter">Kickstarter</a></li>
+                <li><a href="/partner">Partner</a></li>
+                <li><a href="/resources/success-stories">Customer Stories</a></li>
+            </ul>
+        </div>
+        <hr class="clearfix w-100 d-md-none">
+        <div class="col-md-3 mx-auto">
+            <h3>Product</h3>
+            <ul class="list-unstyled mb-0">
+                <li><a href="/solutions">Solution: Self-Service Anywhere</a></li>
+                <li><a href="/docs/quick-deployment-environment">Solution: Quick Deployment Environment (QDE)</a></li>
+                <li><a href="/products/chocolatey-for-business">Chocolatey for Business</a></li>
+                <li><a href="/products#pro-edition">Pro Edition</a></li>
+                <li><a href="/products#foss">Open Source</a></li>
+                <li><a href="/contact/trial">C4B Trial</a></li>
+                <li><a href="/pricing">Pricing</a></li>
+                <li><a href="/support">Support</a></li>
+                <li><a href="/packages">Community Packages</a></li>
+                <li><a href="/events">Events</a></li>
+            </ul>
+        </div>
+        <hr class="clearfix w-100 d-md-none">
+        <div class="col-md-3 mx-auto">
+            <h3>Learn</h3>
+            <ul class="list-unstyled mb-0">
+                <li><a href="/resources">Resource Library</a></li>
+                <li><a href="/events">Events</a></li>
+                <li><a href="/covid-19">COVID-19 Resources</a></li>
+                <li><a href="/docs">Docs</a></li>
+                <li><a href="/resources/videos">Videos</a></li>
+                <li><a href="/resources/case-studies">Case Studies</a></li>
+                <li><a href="/courses">Courses</a></li>
+                <li><a href="/blog">Blog</a> <a href="https://feeds.feedburner.com/ChocolateyBlog" rel="alternate" type="application/rss+xml"><img src="//feedburner.google.com/fb/images/pub/feed-icon16x16.png" alt="Chocolatey Blog" style="vertical-align:middle;border:0" /></a></li>
+                <li><a href="/media-kit">Media Kit</a></li>
+                <li><a href="/sitemap">Sitemap</a></li>
+            </ul>
+        </div>
+        <hr class="clearfix w-100 d-md-none">
+        <div class="col-md-3 mx-auto">
+            <h3>Connect</h3>
+            <ul class="list-unstyled mb-0">
+                <li><a href="/contact">Contact Us</a></li>
+                <li><a href="/support">Support</a></li>
+                <li><a href="http://eepurl.com/4qUJH">Newsletter</a></li>
+                <li><a href="http://cafepress.com/chocolatey">Shop</a></li>
+                <li><a href="/bugs">Report a Bug</a></li>
+                <li><a href="https://status.chocolatey.org">Status</a></li>
+                <li><a href="/careers">Careers</a></li>
+                <li>
+                    <a href="https://twitter.com/chocolateynuget" target="_blank" rel="noreferrer">
+                        <i aria-hidden="true" class="fab fa-twitter mr-2 h3"></i>
+                        <span class="sr-only">Follow Chocolatey Software on Twitter</span>
+                    </a>
+                    <a href="https://facebook.com/ChocolateySoftware" target="_blank" rel="noreferrer">
+                        <i aria-hidden="true" class="fab fa-facebook mr-2 h3"></i>
+                        <span class="sr-only">Follow Chocolatey Software on Facebook</span>
+                    </a>
+                    <a href="https://github.com/chocolatey" target="_blank" rel="noreferrer">
+                        <i aria-hidden="true" class="fab fa-github mr-2 h3"></i>
+                        <span class="sr-only">Find Chocolatey Software on GitHub</span>
+                    </a>
+                    <a href="https://www.youtube.com/chocolateysoftware" target="_blank" rel="noreferrer">
+                        <i aria-hidden="true" class="fab fa-youtube h3"></i>
+                        <span class="sr-only">Subscribe to Chocolatey Software on YouTube</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+</section>
+
+<section class="container-fluid bg-dark text-center pt-3">
+    <div class="row">
+        <div class="col-12">
+            <p class="mb-0 text-white"><strong>&copy; 2020</strong> Chocolatey Software, Inc.</p>
+            <p id="releaseTag" class="mb-0 text-dark"><small>Deployed from <a class="text-dark" href="https://github.com/chocolatey/chocolatey.org/commit/e673e3b09bbd29d53cbeee6adfcfd4420dd447d7" title="View the commit.">e673e3b09b</a>. You are on web.4. Page generated 03 Oct 2020 16:19:31 +00:00.</small></p>
+        </div>
+    </div>
+</section>
+    </footer>
+    <div class="cookies-popup alert bg-primary alert-dismissible fade show text-center mb-0 p-2 border-top" role="alert" aria-atomic="true">
+    <strong>Chocolatey.org uses cookies to enhance the user experience of the site.</strong>
+    <button type="button" class="btn btn-light btn-sm cookies-close d-none d-sm-inline-block" data-dismiss="alert" aria-label="Close">
+        I accept
+    </button>
+    <button type="button" class="btn btn-light cookies-close d-sm-none" data-dismiss="alert" aria-label="Close">
+        I accept
+    </button>
+</div>
+
+    
+
+
+    
+<script src="/cassette.axd/script/4d15d6c59178ab1b50ad90d0da570805c4eb3484/Scripts" type="text/javascript"></script>
+<script src="/cassette.axd/script/f23dc491d89247aa0210309ee266597daf9186e6/Scripts/packages" type="text/javascript"></script>
+<script src="/cassette.axd/script/45fc6478a2cc16bf2713dca3ae18ebea9489c2d0/Scripts/prism" type="text/javascript"></script>
+<script src="/cassette.axd/script/cdf5bca639a7522714dc233af42154ccbd900742/Scripts/install-steps" type="text/javascript"></script>
+<script src="/cassette.axd/script/5f5733953588a6e62d20305db8d89d271d887937/Scripts/easymde" type="text/javascript"></script>
+<script src="/cassette.axd/script/38aa5bdc0f8abe828d929dca37c202f0ea46495f/Scripts/closeable" type="text/javascript"></script>
+
+
+    
+    <script type="text/javascript" language="javascript">
+        $(function () {
+            Closeable.modal("chocolatey_hide_packages_disclaimer");
+            if (!getCookie('chocolatey_hide_packages_disclaimer')) {
+                $(".modal-closeable").css('display', 'block');
+            }
+        });
+    </script>
+    <script language="javascript" type="text/javascript">
+        ((window.gitter = {}).chat = {}).options = {
+            room: 'chocolatey/chocolatey.org'
+        };
+    </script>
+    <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+    <script type="text/javascript" language="javascript">
+        var disqus_shortname = 'chocolatey';
+        var disqus_url = 'http://chocolatey.org/packages/chocolatey-core.extension';
+        var commentItem;
+        function disqus_config() {
+            this.callbacks.onNewComment = [function (comment) {
+            var commentViewModel = { Id: comment.id, Text: comment.text };
+
+            // take the data and post it via json
+            $.post('https://chocolatey.org/packages/chocolatey-core.extension/notify-comment', commentViewModel, function (data) {
+                // At the minute, it is fire and forget
+            });
+            } ];
+        }
+
+        (function () {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</body>
+</html>
